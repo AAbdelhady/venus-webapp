@@ -1,7 +1,7 @@
 FROM node:carbon
 WORKDIR /usr/src/app
 COPY server.js ./
-COPY server .
+COPY server ./
 COPY build ./build
 RUN npm install
 EXPOSE 3000
