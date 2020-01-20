@@ -18,6 +18,8 @@ const App: React.FC = () => {
         >
           Learn React
         </a>
+        <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
+        <small>Custom env variable value <b>{process.env.REACT_APP_TEST_ARG}</b></small>
       </header>
     </div>
   );
