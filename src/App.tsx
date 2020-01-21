@@ -1,8 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
+import axios from './axios';
 
 const App: React.FC = () => {
+    axios.get('test').then(res => {
+        console.log('API Call response', res.data);
+    }).catch(err => console.warn(err));
   return (
     <div className="App">
       <header className="App-header">
@@ -19,10 +23,10 @@ const App: React.FC = () => {
           Learn React
         </a>
         <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
-        <small>Custom env variable value <b>{process.env.REACT_APP_TEST_ARG}</b></small>
+        <small>API base url environment variable value <b>{process.env.REACT_APP_API_BASE_URL}</b></small>
       </header>
     </div>
   );
-}
+};
 
 export default App;
