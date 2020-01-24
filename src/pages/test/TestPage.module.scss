@@ -1,0 +1,15 @@
+.Container {
+  text-align: center;
+  & a {
+    color: white;
+  }
+}
+
+.ContainerRed {
+  background: orangered;
+}
+
+.ContainerBlue {
+  background: cornflowerblue;
+}
+

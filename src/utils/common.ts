@@ -13,3 +13,7 @@ export const googleLogin = (event: any) => {
     saveToLocalStorage(localStorageKeys.redirect, window.location.pathname);
     window.location.href = googleLoginLink;
 };
+
+export const join = (...strings: string[]): string => {
+    return strings.join(' ');
+};
