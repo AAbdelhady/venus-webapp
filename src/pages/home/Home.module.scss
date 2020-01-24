@@ -25,10 +25,9 @@
   & code {
     color: greenyellow;
   }
-}
-
-.AppLink {
-  color: #fbe25e;
+  & a {
+    color: #fbe25e;
+  }
 }
 
 @keyframes AppLogoSpin {
