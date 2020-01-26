@@ -3,14 +3,15 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import logo from "../../assets/logo.svg";
 import classes from './Home.module.scss';
-import {googleLogin} from '../../utils/common';
+import {googleLogin, facebookLogin} from '../../utils/common';
 
 class HomePage extends Component<any> {
     render() {
         const logoutLink = `${process.env.REACT_APP_API_BASE_URL}/logout`;
+        const loginLinks = <h3>Please login <a href="/" onClick={googleLogin}>Google</a> <a href="/" onClick={facebookLogin}>Facebook</a></h3>;
         const authenticatedPersonSection = this.props.authenticatedUser
             ? <h3>Authenticated user is {this.props.authenticatedUser.first_name} {this.props.authenticatedUser.last_name} <a href={logoutLink}>Logout</a></h3>
-            : <h3>Please login <a href="/" onClick={googleLogin}>Google</a></h3>
+            : loginLinks;
         return (
             <div className={classes.App}>
                 <header className={classes.AppHeader}>
