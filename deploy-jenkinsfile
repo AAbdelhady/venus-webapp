@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Docker Compose Stop Frontend') {
             steps {
-                sh 'ssh -t ${remoteHost} "docker-compose -f ${composeFileLocation} stop frontend"'
+                sh 'ssh -t ${remoteHost} "docker-compose -f ${composeFileLocation} rm -sf frontend"'
              }
         }
         stage('Clean old local images') {

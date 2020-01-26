@@ -8,7 +8,12 @@ import {googleLogin, facebookLogin} from '../../utils/common';
 class HomePage extends Component<any> {
     render() {
         const logoutLink = `${process.env.REACT_APP_API_BASE_URL}/logout`;
-        const loginLinks = <h3>Please login <a href="/" onClick={googleLogin}>Google</a> <a href="/" onClick={facebookLogin}>Facebook</a></h3>;
+        const loginLinks = (
+            <div>
+                <h3>Please login </h3>
+                <h3><a href="/" onClick={googleLogin}>Google</a> <a href="/" onClick={facebookLogin}>Facebook</a></h3>
+            </div>
+        );
         const authenticatedPersonSection = this.props.authenticatedUser
             ? <h3>Authenticated user is {this.props.authenticatedUser.first_name} {this.props.authenticatedUser.last_name} <a href={logoutLink}>Logout</a></h3>
             : loginLinks;
