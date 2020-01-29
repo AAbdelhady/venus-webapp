@@ -9,13 +9,15 @@ import * as serviceWorker from './serviceWorker';
 import './index.scss';
 import App from './App';
 import authReducer from './store/reducers/auth';
+import uiReducer from './store/reducers/ui';
 
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    auth: authReducer
+    auth: authReducer,
+    ui: uiReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

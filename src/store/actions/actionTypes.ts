@@ -1,3 +1,10 @@
-export const AUTH_START = 'AUTH_START';
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const AUTH_FAIL = 'AUTH_FAIL';
+export const AUTH = {
+    START: 'AUTH_START',
+    SUCCESS: 'AUTH_SUCCESS',
+    FAIL: 'AUTH_FAIL',
+};
+
+export const UI = {
+    SHOW_LOADING: 'SHOW_LOADING',
+    HIDE_LOADING: 'HIDE_LOADING'
+};

@@ -1,8 +1,5 @@
 pipeline {
     environment {
-        registry = 'aabdelhady/venus-webapp'
-        registryCredential = 'docker-hub-credentials'
-        dockerImage = ''
         remoteHost = 'root@172.105.69.29'
         composeFileLocation = '/home/docker-compose.yml'
     }

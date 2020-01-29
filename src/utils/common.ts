@@ -1,5 +1,5 @@
-import {saveToLocalStorage} from "./localStorage";
-import {localStorageKeys, socialLoginLinkPrefix} from "./constants";
+import {saveToLocalStorage} from './localStorage';
+import {localStorageKeys, socialLoginLinkPrefix} from './constants';
 
 export const updateObject = (oldObject, updatedProperties) => {
     return {
@@ -19,7 +19,6 @@ export const facebookLogin = (event: any) => {
 const login = (event: any, suffix: string) => {
     event.preventDefault();
     saveToLocalStorage(localStorageKeys.redirect, window.location.pathname);
-    debugger
     window.location.href = socialLoginLinkPrefix + suffix;
 };
 
