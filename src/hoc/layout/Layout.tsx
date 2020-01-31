@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-import classes from './Layout.scss';
+import {connect} from 'react-redux';
+import classes from './Layout.module.scss';
 import Toolbar from '../../components/navigation/toolbar/Toolbar';
 import SideDrawer from '../../components/navigation/sideDrawer/SideDrawer';
 
@@ -8,7 +8,7 @@ interface LayoutState {
     showSideDrawer: boolean;
 }
 
-class Layout extends Component {
+class Layout extends Component<any> {
     state = {
         showSideDrawer: false
     };
@@ -26,7 +26,7 @@ class Layout extends Component {
     render () {
         return (
             <>
-                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} />
+                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler}  authorizedUser={this.props.authorizedUser}/>
                 <SideDrawer
                     open={this.state.showSideDrawer}
                     closed={this.sideDrawerClosedHandler} />
@@ -38,4 +38,10 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+const mapStateToProps = state => {
+    return {
+        authorizedUser: state.auth.user
+    }
+}
+
+export default connect(mapStateToProps)(Layout);

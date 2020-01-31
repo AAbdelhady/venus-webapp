@@ -16,7 +16,7 @@ const sideDrawer = ( props ) => {
             <div className={attachedClasses.join(' ')}>
                 <img src={logo} className={classes.Logo} alt="logo"/>
                 <nav>
-                    <NavigationItems />
+                    <NavigationItems authorizedUser={props.authorizedUser}/>
                 </nav>
             </div>
         </>

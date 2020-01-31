@@ -1,14 +1,40 @@
 import React from 'react';
-
+import {withRouter} from 'react-router-dom';
 import classes from './NavigationItems.module.scss';
 import NavigationItem from './navigationItem/NavigationItem';
+import {User, Role} from "../../../models/user.model";
 
-const navigationItems = () => (
+const authNav = (authorizedUser: User) => {
+    return authorizedUser ?
+        prepareNavItem("/profile", `${authorizedUser.firstName} ${authorizedUser.lastName}`) :
+        <NavigationItem key="login" link="">login or sign up</NavigationItem>;
+};
+
+const artistOnlyNavs = (props) => {
+    return (props.authorizedUser?.role === Role.ARTIST) ? [
+        prepareNavItem("/dashboard", "Dashboard", props.location.pathname)
+    ] : null;
+};
+
+const customerOnlyNavs = (props) => {
+    return (props.authorizedUser?.role === Role.CUSTOMER) ? [
+        prepareNavItem("/search", "Search", props.location.pathname)
+    ] : null;
+};
+
+const navigationItems = (props) => (
     <ul className={classes.NavigationItems}>
-        <NavigationItem link="/" exact>Burger Builder</NavigationItem>
-        <NavigationItem link="/orders">Orders</NavigationItem>
-        <NavigationItem link="/auth">Authenticate</NavigationItem>
+        {artistOnlyNavs(props)}
+        {customerOnlyNavs(props)}
+        {authNav(props)}
     </ul>
 );
 
-export default navigationItems;
+const prepareNavItem = (path: string, title: string, currentPath?: string) => {
+    if (currentPath && currentPath === path) {
+        return null;
+    }
+    return <NavigationItem key={path} link={path}>{title}</NavigationItem>;
+};
+
+export default withRouter(navigationItems);

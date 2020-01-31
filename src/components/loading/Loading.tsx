@@ -1,10 +1,11 @@
 import React, {FC} from 'react';
-import Backdrop from '@material-ui/core/Backdrop';
+import Backdrop from '../ui/backdrop/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {ZIndex} from '../../utils/enums';
 
 const loading: FC<any> = (props) => {
     return (
-        <Backdrop id="LoadingBackdrop" open={props.show}>
+        <Backdrop show={props.show} zIndex={ZIndex.loadingBackdrop}>
             <CircularProgress color="inherit" />
         </Backdrop>
     );
