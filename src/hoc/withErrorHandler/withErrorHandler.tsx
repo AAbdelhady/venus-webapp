@@ -25,6 +25,10 @@ const withErrorHandler: any = ( WrappedComponent, axios ) => {
             this.setState( { error: null } );
         };
 
+        get showError(): boolean {
+            return this.state.error && this.state.error?.response?.status !== 401;
+        }
+
         private initInterceptors() {
             this.reqInterceptor = axios.interceptors.request.use( req => {
                 this.setState( { error: null } );
@@ -51,7 +55,7 @@ const withErrorHandler: any = ( WrappedComponent, axios ) => {
             }
             return (
                 <>
-                    <Dialog open={!!this.state.error} onClose={this.errorConfirmedHandler} zIndex={ZIndex.errorHandlerDialog}>
+                    <Dialog open={this.showError} onClose={this.errorConfirmedHandler} zIndex={ZIndex.errorHandlerDialog}>
                         {errorMessage}
                     </Dialog>
                     <WrappedComponent {...this.props} />
