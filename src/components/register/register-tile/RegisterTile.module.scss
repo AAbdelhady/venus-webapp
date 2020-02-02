@@ -1,0 +1,18 @@
+.Container {
+  align-items: center;
+  background: lightgrey;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+  width: 200px;
+  & p {
+    margin: auto;
+    font-weight: bold;
+  }
+  & svg {
+    margin-top: 50px;
+    width: 50px;
+  }
+}

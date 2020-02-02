@@ -7,5 +7,6 @@ export interface User {
 
 export enum Role {
     ARTIST = 'ARTIST',
-    CUSTOMER = 'CUSTOMER'
+    CUSTOMER = 'CUSTOMER',
+    UNSPECIFIED = 'UNSPECIFIED'
 }

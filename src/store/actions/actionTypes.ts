@@ -1,7 +1,13 @@
 export const AUTH = {
     START: 'AUTH_START',
     SUCCESS: 'AUTH_SUCCESS',
-    FAIL: 'AUTH_FAIL',
+    FAIL: 'AUTH_FAIL'
+};
+
+export const REGISTER = {
+    START: 'REGISTER_START',
+    SUCCESS: 'REGISTER_SUCCESS',
+    FAIL: 'REGISTER_FAIL'
 };
 
 export const UI = {

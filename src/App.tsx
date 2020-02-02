@@ -4,7 +4,9 @@ import './App.scss';
 import {connect} from 'react-redux';
 import Routes from './routes';
 import Loading from './components/loading/Loading';
+import Register from './components/register/Register';
 import * as actions from './store/actions/index';
+import {Role} from './models/user.model';
 
 class App extends React.Component<any> {
 
@@ -17,6 +19,7 @@ class App extends React.Component<any> {
             <>
                 <Routes />
                 <Loading show={this.props.showLoading}/>
+                <Register show={this.props.showRegister} register={this.props.registerUnspecifiedUser}/>
             </>
         )
     };
@@ -24,13 +27,15 @@ class App extends React.Component<any> {
 
 const mapStateToProps = state => {
     return {
-        showLoading: state.ui.showLoading
+        showLoading: state.ui.showLoading,
+        showRegister: state.auth.user?.role === Role.UNSPECIFIED
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAuthorizedUser: () => dispatch(actions.auth())
+        fetchAuthorizedUser: () => dispatch(actions.auth()),
+        registerUnspecifiedUser: (asArtist) => dispatch(actions.register(asArtist))
     };
 };
 

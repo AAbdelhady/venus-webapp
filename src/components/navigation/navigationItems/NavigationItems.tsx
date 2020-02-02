@@ -7,7 +7,7 @@ import {User, Role} from "../../../models/user.model";
 const authNav = (authorizedUser: User) => {
     return authorizedUser ?
         prepareNavItem("/profile", `${authorizedUser.firstName} ${authorizedUser.lastName}`) :
-        <NavigationItem key="login" link="">login or sign up</NavigationItem>;
+        <NavigationItem key="login" link="">Login | Sign up</NavigationItem>;
 };
 
 const artistOnlyNavs = (props) => {
@@ -26,7 +26,7 @@ const navigationItems = (props) => (
     <ul className={classes.NavigationItems}>
         {artistOnlyNavs(props)}
         {customerOnlyNavs(props)}
-        {authNav(props)}
+        {authNav(props.authorizedUser)}
     </ul>
 );
 
