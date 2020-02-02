@@ -45,8 +45,8 @@ const withErrorHandler: any = ( WrappedComponent, axios ) => {
             let errorMessage: any = null;
             if (this.state.error?.response) {
                 const errorResponse = this.state.error.response;
-                const meta = `[status: ${errorResponse.status} - code: ${errorResponse.data.code.value}]`;
-                const message = errorResponse.data.message;
+                const meta = `[status: ${errorResponse.status} - code: ${errorResponse.data.code?.value}]`;
+                const message = errorResponse.data.message || errorResponse.message;
                 errorMessage = <p><strong>{meta}</strong>&nbsp;{message}</p>
             }
             return (
