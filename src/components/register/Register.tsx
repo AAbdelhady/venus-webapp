@@ -10,14 +10,16 @@ import classes from './Register.module.scss';
 import axios from '../../axios';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
+const title = 'How do you want to use the app?';
+
 const iconStyle = { fontSize: 50 };
 
 const register = (props) => {
     return (
-        <Dialog open={props.show} title="How do you want to use the app?">
+        <Dialog open={props.show} title={title}>
             <Container className={classes.Container}>
                 <Row>
-                    <Col sm>
+                    <Col sm className={classes.ArtistTile}>
                         <RegisterTile title="Artist" click={() => props.register(true)}>
                             <BusinessIcon style={iconStyle}/>
                         </RegisterTile>

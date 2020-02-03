@@ -1,25 +1,19 @@
 import React from 'react';
-
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import logo from '../../../assets/small-logo.png';
 import NavigationItems from '../navigationItems/NavigationItems';
 import classes from './SideDrawer.module.scss';
-import Backdrop from '../../ui/backdrop/Backdrop';
 
 const sideDrawer = ( props ) => {
-    let attachedClasses = [classes.SideDrawer, classes.Close];
-    if (props.open) {
-        attachedClasses = [classes.SideDrawer, classes.Open];
-    }
     return (
-        <>
-            <Backdrop show={props.open} clicked={props.closed}/>
-            <div className={attachedClasses.join(' ')}>
-                <img src={logo} className={classes.Logo} alt="logo"/>
-                <nav>
-                    <NavigationItems authorizedUser={props.authorizedUser}/>
-                </nav>
+        <SwipeableDrawer open={props.open} onOpen={props.opened} onClose={props.closed}>
+            <div className={classes.Logo}>
+                <img src={logo} alt="logo"/>
             </div>
-        </>
+            <nav className={classes.Nav}>
+                <NavigationItems authorizedUser={props.authorizedUser}/>
+            </nav>
+        </SwipeableDrawer>
     );
 };
 

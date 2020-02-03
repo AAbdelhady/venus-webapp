@@ -10,8 +10,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import classes from './Dialog.module.scss';
 import {ZIndex} from '../../utils/enums';
 
-const MAX_WIDTH = 'xl';
-
 const Transition: React.ComponentType<TransitionProps> = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -21,13 +19,12 @@ const dialogTitle = (title) => {
 };
 
 const Dialog = (props) => {
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down(Breakpoint.sm));
+    const fullScreen = useMediaQuery(useTheme().breakpoints.down(Breakpoint.sm));
     const style = {
         zIndex: props.zIndex || ZIndex.defaultDialog
     };
     return (
-        <MatDialog open={props.open} onClose={props.onClose} keepMounted TransitionComponent={Transition} fullScreen={fullScreen} maxWidth={MAX_WIDTH} style={style}>
+        <MatDialog open={props.open} onClose={props.onClose} keepMounted TransitionComponent={Transition} fullScreen={fullScreen} maxWidth={false} style={style}>
             {dialogTitle(props.title)}
             <DialogContent>
                 {props.children}

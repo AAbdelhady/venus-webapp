@@ -7,7 +7,7 @@ const backdrop = (props) => {
         color: '#fff'
     };
     return (
-        <Backdrop style={style} open={props.show}>
+        <Backdrop style={style} open={props.show} onClick={props.clicked}>
             {props.children}
         </Backdrop>
     );
