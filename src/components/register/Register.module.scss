@@ -2,11 +2,16 @@
 
 .Container {
   background: white;
-  padding: 0 50px 50px;
+  padding: 0 50px 25px;
 }
 
 .CustomerTile {
   margin: 0 0 0 50px;
+}
+
+.LogoutLinkContainer {
+  margin-top: 25px;
+  text-align: center;
 }
 
 @media (max-width: $sm-breakpoint) {
@@ -16,5 +21,9 @@
 
   .CustomerTile {
     margin: 50px 0 0 0;
+  }
+
+  .LogoutLinkContainer {
+    margin-top: 50px;
   }
 }

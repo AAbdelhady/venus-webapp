@@ -5,10 +5,10 @@ import logo from "../../assets/logo.svg";
 import classes from './Home.module.scss';
 import {googleLogin, facebookLogin} from '../../utils/common';
 import Layout from "../../hoc/layout/Layout";
+import {logoutLink} from '../../utils/constants';
 
 class HomePage extends Component<any> {
     render() {
-        const logoutLink = `${process.env.REACT_APP_API_BASE_URL}/logout`;
         const loginLinks = (
             <div>
                 <h3>Please login </h3>

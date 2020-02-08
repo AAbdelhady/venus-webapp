@@ -9,6 +9,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import classes from './Register.module.scss';
 import axios from '../../axios';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import {Button} from '@material-ui/core';
+import {logoutLink} from '../../utils/constants';
 
 const title = 'How do you want to use the app?';
 
@@ -30,6 +32,11 @@ const register = (props) => {
                         </RegisterTile>
                     </Col>
                 </Row>
+                <div className={classes.LogoutLinkContainer}>
+                    <Button href={logoutLink} color="primary">
+                        Logout
+                    </Button>
+                </div>
             </Container>
         </Dialog>
     )
