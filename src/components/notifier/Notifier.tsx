@@ -16,7 +16,7 @@ class Notifier extends Component<Props> {
     notifier;
 
     componentDidMount(): void {
-        this.props.showSubject.subscribe(() => this.showNotification());
+        this.props.showSubject.subscribe(this.showNotification);
     }
 
     showNotification = () => {
