@@ -10,3 +10,7 @@ export {
     showLoadingOverlay,
     hideLoadingOverlay
 } from './ui';
+
+export {
+    searchArtists
+} from './artist'

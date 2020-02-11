@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Dialog from '../dialog/Dialog';
 import {ZIndex} from '../../utils/enums';
+import classes from './withErrorHandler.module.scss';
 
 const withErrorHandler: any = ( WrappedComponent, axios ) => {
 
@@ -29,6 +30,19 @@ const withErrorHandler: any = ( WrappedComponent, axios ) => {
             return this.state.error && this.state.error?.response?.status !== 401;
         }
 
+        get errorMessage() {
+            if (this.state.error?.response) {
+                const errorResponse = this.state.error.response;
+                const meta = `[status: ${errorResponse.status} - code: ${errorResponse.data.code?.value}]`;
+                const message = errorResponse.data.message || errorResponse.message;
+                return <span><strong>{meta}</strong>&nbsp;{message}</span>
+            }
+            if (this.state.error?.message) {
+                return <strong>{this.state.error?.message}</strong>;
+            }
+            return <strong>Something went wrong :(</strong>
+        }
+
         private initInterceptors() {
             this.reqInterceptor = axios.interceptors.request.use( req => {
                 this.setState( { error: null } );
@@ -46,17 +60,10 @@ const withErrorHandler: any = ( WrappedComponent, axios ) => {
         }
 
         render () {
-            let errorMessage: any = null;
-            if (this.state.error?.response) {
-                const errorResponse = this.state.error.response;
-                const meta = `[status: ${errorResponse.status} - code: ${errorResponse.data.code?.value}]`;
-                const message = errorResponse.data.message || errorResponse.message;
-                errorMessage = <p><strong>{meta}</strong>&nbsp;{message}</p>
-            }
             return (
                 <>
-                    <Dialog open={!!this.showError} onClose={this.errorConfirmedHandler} zIndex={ZIndex.errorHandlerDialog}>
-                        {errorMessage}
+                    <Dialog open={this.showError} onClose={this.errorConfirmedHandler} zIndex={ZIndex.errorHandlerDialog}>
+                        <p className={classes.Message}>{this.errorMessage}</p>
                     </Dialog>
                     <WrappedComponent {...this.props} />
                 </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {TransitionProps} from '@material-ui/core/transitions';
 import Slide from '@material-ui/core/Slide';
-import MatDialog from '@material-ui/core/Dialog';
+import MuiDialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import {useMediaQuery} from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
@@ -24,12 +24,12 @@ const Dialog = (props) => {
         zIndex: props.zIndex || ZIndex.defaultDialog
     };
     return (
-        <MatDialog open={props.open} onClose={props.onClose} keepMounted TransitionComponent={Transition} fullScreen={fullScreen} maxWidth={false} style={style}>
+        <MuiDialog open={!!props.open} onClose={props.onClose} keepMounted TransitionComponent={Transition} fullScreen={fullScreen} maxWidth={false} style={style}>
             {dialogTitle(props.title)}
             <DialogContent>
                 {props.children}
             </DialogContent>
-        </MatDialog>
+        </MuiDialog>
     )
 };
 

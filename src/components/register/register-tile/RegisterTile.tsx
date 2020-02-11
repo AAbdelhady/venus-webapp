@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './RegisterTile.module.scss';
 
-const registerTile = (props) => {
+const RegisterTile = (props) => {
     return (
         <div className={classes.Container} onClick={props.click}>
             {props.children}
@@ -10,4 +10,4 @@ const registerTile = (props) => {
     )
 };
 
-export default registerTile;
+export default RegisterTile;

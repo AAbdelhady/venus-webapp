@@ -4,7 +4,7 @@ import logo from '../../../assets/small-logo.png';
 import NavigationItems from '../navigationItems/NavigationItems';
 import classes from './SideDrawer.module.scss';
 
-const sideDrawer = ( props ) => {
+const SideDrawer = ( props ) => {
     return (
         <SwipeableDrawer open={props.open} onOpen={props.opened} onClose={props.closed}>
             <div className={classes.Logo}>
@@ -17,4 +17,4 @@ const sideDrawer = ( props ) => {
     );
 };
 
-export default sideDrawer;
+export default SideDrawer;

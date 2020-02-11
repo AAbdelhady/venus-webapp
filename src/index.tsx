@@ -10,6 +10,7 @@ import './index.scss';
 import App from './App';
 import authReducer from './store/reducers/auth';
 import uiReducer from './store/reducers/ui';
+import artistReducer from './store/reducers/artist';
 
 
 // @ts-ignore
@@ -17,7 +18,8 @@ const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDU
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    ui: uiReducer
+    ui: uiReducer,
+    artist: artistReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

@@ -16,7 +16,7 @@ const title = 'How do you want to use the app?';
 
 const iconStyle = { fontSize: 50 };
 
-const register = (props) => {
+const Register = (props) => {
     return (
         <Dialog open={props.show} title={title}>
             <Container className={classes.Container}>
@@ -42,4 +42,4 @@ const register = (props) => {
     )
 };
 
-export default withErrorHandler(register, axios);
+export default withErrorHandler(Register, axios);

@@ -3,7 +3,7 @@ import Backdrop from '../ui/backdrop/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {ZIndex} from '../../utils/enums';
 
-const loading = (props) => {
+const Loading = (props) => {
     return (
         <Backdrop show={props.show} zIndex={ZIndex.loadingBackdrop}>
             <CircularProgress color="inherit" />
@@ -11,4 +11,4 @@ const loading = (props) => {
     );
 };
 
-export default loading;
+export default Loading;

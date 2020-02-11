@@ -4,13 +4,12 @@ export const AUTH = {
     FAIL: 'AUTH_FAIL'
 };
 
-export const REGISTER = {
-    START: 'REGISTER_START',
-    SUCCESS: 'REGISTER_SUCCESS',
-    FAIL: 'REGISTER_FAIL'
-};
-
 export const UI = {
     SHOW_LOADING: 'SHOW_LOADING',
     HIDE_LOADING: 'HIDE_LOADING'
+};
+
+export const ARTIST = {
+  SEARCH_SUCCESS: 'ARTIST_SEARCH_SUCCESS',
+  SEARCH_FAIL: 'ARTIST_SEARCH_FAIL'
 };

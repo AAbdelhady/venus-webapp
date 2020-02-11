@@ -6,8 +6,13 @@ import classes from './Home.module.scss';
 import {googleLogin, facebookLogin} from '../../utils/common';
 import Layout from "../../hoc/layout/Layout";
 import {logoutLink} from '../../utils/constants';
+import Notifier from '../../components/notifier/Notifier';
+import {Subject} from 'rxjs';
 
 class HomePage extends Component<any> {
+
+    notifierSubject = new Subject();
+
     render() {
         const loginLinks = (
             <div>
@@ -28,6 +33,11 @@ class HomePage extends Component<any> {
                         <small>API base url environment variable value <b>{process.env.REACT_APP_API_BASE_URL}</b></small>
                         <Link to="/test">Test Page ></Link>
                     </header>
+                    <Notifier title="Venus Notification ;)" showSubject={this.notifierSubject}/>
+
+                    <button onClick={() => this.notifierSubject.next()}>
+                        Notify Me!
+                    </button>
                 </div>
             </Layout>
         );

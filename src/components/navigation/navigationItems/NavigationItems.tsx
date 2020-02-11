@@ -22,7 +22,7 @@ const customerOnlyNavs = (props) => {
     ] : null;
 };
 
-const navigationItems = (props) => (
+const NavigationItems = (props) => (
     <ul className={classes.NavigationItems}>
         {artistOnlyNavs(props)}
         {customerOnlyNavs(props)}
@@ -37,4 +37,4 @@ const prepareNavItem = (path: string, title: string, currentPath?: string) => {
     return <NavigationItem key={path} link={path}>{title}</NavigationItem>;
 };
 
-export default withRouter(navigationItems);
+export default withRouter(NavigationItems);

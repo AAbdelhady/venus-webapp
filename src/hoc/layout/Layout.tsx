@@ -30,11 +30,12 @@ class Layout extends Component<any> {
     render () {
         return (
             <>
-                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler}  authorizedUser={this.props.authorizedUser}/>
+                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} authorizedUser={this.props.authorizedUser}/>
                 <SideDrawer
                     open={this.state.showSideDrawer}
                     opened={this.sideDrawerOpenedHandler}
-                    closed={this.sideDrawerClosedHandler} />
+                    closed={this.sideDrawerClosedHandler}
+                    authorizedUser={this.props.authorizedUser}/>
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>

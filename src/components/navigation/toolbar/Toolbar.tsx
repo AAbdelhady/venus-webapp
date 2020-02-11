@@ -5,7 +5,7 @@ import logo from '../../../assets/small-logo.png';
 import NavigationItems from '../navigationItems/NavigationItems';
 import DrawerToggle from '../sideDrawer/drawerToggle/DrawerToggle';
 
-const toolbar = ( props ) => (
+const Toolbar = ( props ) => (
     <header className={classes.Toolbar}>
         <DrawerToggle clicked={props.drawerToggleClicked} />
         <img src={logo} className={classes.Logo} alt="logo"/>
@@ -15,4 +15,4 @@ const toolbar = ( props ) => (
     </header>
 );
 
-export default toolbar;
+export default Toolbar;
