@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classes from './Layout.module.scss';
 import Toolbar from '../../components/navigation/toolbar/Toolbar';
-import SideDrawer from '../../components/navigation/sideDrawer/SideDrawer';
+import SideDrawer from '../../components/navigation/side-drawer/SideDrawer';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import axios from '../../axios';
 import {User} from '../../models/user.model';

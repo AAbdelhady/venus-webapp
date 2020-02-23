@@ -1,18 +1,21 @@
 import {I18N as i18nActionTypes} from '../actions/actionTypes';
 import {updateObject} from '../../utils/common';
-import {DEFAULT_LANG, Lang} from '../../i18n/lang';
+import {DEFAULT_LANG, Lang, langPrefix} from '../../i18n/lang';
 
 interface State {
-    lang: Lang
+    lang: Lang,
+    langPrefix: string
 }
 
 const initialState: State = {
-    lang: DEFAULT_LANG
+    lang: DEFAULT_LANG,
+    langPrefix: ''
 };
 
 const changeLanguage = (state: State, action) => {
     return updateObject(state, {
-        lang: action.lang
+        lang: action.lang,
+        langPrefix: langPrefix(action.lang)
     });
 };
 

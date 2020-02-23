@@ -11,6 +11,10 @@ export type Lang = (typeof supportedLangs)[number];
 
 export const DEFAULT_LANG: Lang = 'ee';
 
+export const langPrefix = (lang: Lang) => {
+    return lang === DEFAULT_LANG ? '' : `/${lang}`;
+};
+
 export const en = {
     common: common_en,
     register: register_en

@@ -11,9 +11,7 @@ import {ArtistRequest} from '../../api/artist.api';
 
 interface Props {
     show: boolean;
-
     registerArtist(artistRequest: ArtistRequest);
-
     registerCustomer();
 }
 

@@ -1,0 +1,15 @@
+@import "../../assets/css/variables";
+
+$facebook-blue: #4568b2;
+
+.ButtonContainer {
+  padding: 10px;
+
+  & button {
+    width: 100%;
+  }
+}
+
+.FacebookLogo {
+  color: $facebook-blue;
+}

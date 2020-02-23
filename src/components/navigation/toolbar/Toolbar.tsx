@@ -1,12 +1,13 @@
 import React from 'react';
-
+import {useSelector} from 'react-redux';
 import classes from './Toolbar.module.scss';
 import logo from '../../../assets/small-logo.png';
-import NavigationItems from '../navigationItems/NavigationItems';
-import DrawerToggle from '../sideDrawer/drawerToggle/DrawerToggle';
+import NavigationItems from '../navigation-items/NavigationItems';
+import DrawerToggle from '../side-drawer/drawer-toggle/DrawerToggle';
 import LangSelector from '../../lang-selector/LangSelector';
 import {User} from '../../../models/user.model';
 import {RouteComponentProps} from 'react-router';
+import {NavLink} from 'react-router-dom';
 
 interface Props {
     authorizedUser: User;
@@ -15,15 +16,20 @@ interface Props {
     drawerToggleClicked();
 }
 
-const Toolbar = (props: Props) => (
-    <header className={classes.Toolbar}>
-        <DrawerToggle clicked={props.drawerToggleClicked} />
-        <img src={logo} className={classes.Logo} alt="logo"/>
-        <LangSelector activeRoute={props.activeRoute}/>
-        <nav className={classes.DesktopOnly}>
-            <NavigationItems authorizedUser={props.authorizedUser}/>
-        </nav>
-    </header>
-);
+const Toolbar = (props: Props) => {
+    const langPrefix = useSelector(state => state.i18n.langPrefix);
+    return (
+        <header className={classes.Toolbar}>
+            <DrawerToggle clicked={props.drawerToggleClicked}/>
+            <NavLink to={langPrefix} exact className={classes.Logo}>
+                <img src={logo} alt="logo"/>
+            </NavLink>
+            <LangSelector activeRoute={props.activeRoute}/>
+            <nav className={classes.DesktopOnly}>
+                <NavigationItems authorizedUser={props.authorizedUser} langPrefix={langPrefix}/>
+            </nav>
+        </header>
+    );
+};
 
 export default Toolbar;
