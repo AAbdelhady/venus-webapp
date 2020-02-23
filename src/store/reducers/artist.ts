@@ -3,31 +3,31 @@ import {updateObject} from '../../utils/common';
 import {Artist} from '../../models/artist.model';
 import {Page} from '../../models/page.model';
 
-interface ArtistSearchState {
+interface State {
     artistPage: Page<Artist> | null,
     error: any
 }
 
-const initialState: ArtistSearchState = {
+const initialState: State = {
     artistPage: null,
     error: null
 };
 
-const searchSuccess = (state: ArtistSearchState, action) => {
+const searchSuccess = (state: State, action) => {
     return updateObject(state, {
         artistPage: action.artistPage,
         error: null
     });
 };
 
-const searchFail = (state: ArtistSearchState, action) => {
+const searchFail = (state: State, action) => {
     return updateObject(state, {
         artistPage: null,
         error: action.error
     });
 };
 
-const reducer = (state: ArtistSearchState = initialState, action) => {
+const reducer = (state: State = initialState, action) => {
     switch (action.type) {
         case artistActionTypes.SEARCH_SUCCESS:
             return searchSuccess(state, action);

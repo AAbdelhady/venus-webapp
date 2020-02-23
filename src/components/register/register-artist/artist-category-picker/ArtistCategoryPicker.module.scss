@@ -1,0 +1,11 @@
+.CategoryTile {
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  height: 50px;
+  text-align: center;
+
+  & p {
+    font-weight: bold;
+  }
+}

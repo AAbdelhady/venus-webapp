@@ -1,5 +1,5 @@
 import React from 'react';
-import ArtistCard from '../artist-card/ArtistCard';
+import ArtistCard from './artist-card/ArtistCard';
 import classes from './ArtistCardList.module.scss';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

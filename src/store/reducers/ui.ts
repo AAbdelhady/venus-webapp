@@ -1,23 +1,23 @@
 import {UI as uiActionTypes} from '../actions/actionTypes';
 import {updateObject} from '../../utils/common';
 
-interface UserInterfaceState {
+interface State {
     showLoading: boolean;
 }
 
-const initialState: UserInterfaceState = {
+const initialState: State = {
     showLoading: false
 };
 
-const showLoadingOverlay = (state: UserInterfaceState) => {
+const showLoadingOverlay = (state: State) => {
     return updateObject(state, {showLoading: true});
 };
 
-const hideLoadingOverlay = (state: UserInterfaceState) => {
+const hideLoadingOverlay = (state: State) => {
     return updateObject(state, {showLoading: false});
 };
 
-const reducer = (state: UserInterfaceState = initialState, action) => {
+const reducer = (state: State = initialState, action) => {
     switch (action.type) {
         case uiActionTypes.SHOW_LOADING:
             return showLoadingOverlay(state);

@@ -1,45 +1,60 @@
-import React from 'react';
-import RegisterTile from './register-tile/RegisterTile';
-import Dialog from '../../hoc/dialog/Dialog';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col'
-import BusinessIcon from '@material-ui/icons/Business';
-import PersonIcon from '@material-ui/icons/Person';
 import classes from './Register.module.scss';
-import axios from '../../axios';
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import {Button} from '@material-ui/core';
-import {logoutLink} from '../../utils/constants';
+import Dialog from '../../hoc/dialog/Dialog';
+import RolePicker from './role-picker/RolePicker';
+import {Role} from '../../models/user.model';
+import RegisterArtist from './register-artist/RegisterArtist';
+import * as actions from '../../store/actions/index';
+import {ArtistRequest} from '../../api/artist.api';
 
-const title = 'How do you want to use the app?';
+interface Props {
+    show: boolean;
 
-const iconStyle = { fontSize: 50 };
+    registerArtist(artistRequest: ArtistRequest);
 
-const Register = (props) => {
-    return (
-        <Dialog open={props.show} title={title}>
-            <Container className={classes.Container}>
-                <Row>
-                    <Col sm className={classes.ArtistTile}>
-                        <RegisterTile title="Artist" click={() => props.register(true)}>
-                            <BusinessIcon style={iconStyle}/>
-                        </RegisterTile>
-                    </Col>
-                    <Col sm className={classes.CustomerTile}>
-                        <RegisterTile title="Customer" click={() => props.register(false)}>
-                            <PersonIcon style={iconStyle}/>
-                        </RegisterTile>
-                    </Col>
-                </Row>
-                <div className={classes.LogoutLinkContainer}>
-                    <Button href={logoutLink} color="primary">
-                        Logout
-                    </Button>
-                </div>
-            </Container>
-        </Dialog>
-    )
+    registerCustomer();
+}
+
+class Register extends Component<Props> {
+
+    state = {
+      role: Role.UNSPECIFIED
+    };
+
+    pickRole = (role: Role) => {
+        this.setState({role: role});
+    };
+
+    backToPickRole = () => {
+      this.setState({role: Role.UNSPECIFIED});
+    };
+
+    render() {
+        let content = <RolePicker pickRole={this.pickRole}/>;
+        if (this.state.role === Role.ARTIST) {
+            content = <RegisterArtist register={this.props.registerArtist} back={this.backToPickRole}/>;
+        }
+        if (this.state.role === Role.CUSTOMER) {
+            content = <h1 onClick={this.backToPickRole}>CUSTOMER</h1>
+        }
+
+        return (
+            <Dialog open={this.props.show}>
+                <Container className={classes.Container}>
+                    {content}
+                </Container>
+            </Dialog>
+        )
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        registerArtist: (artistRequest: ArtistRequest) => dispatch(actions.registerArtist(artistRequest)),
+        registerCustomer: () => dispatch(actions.registerCustomer())
+    };
 };
 
-export default withErrorHandler(Register, axios);
+export default connect(null, mapDispatchToProps)(Register);

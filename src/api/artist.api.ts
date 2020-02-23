@@ -4,9 +4,9 @@ import {pageableQueryParams} from './api.util';
 
 const root = 'artist';
 
-export const registerAsArtist = () => {
+export const registerAsArtist = (artistRequest: ArtistRequest) => {
     const url = `${root}`;
-    return axios.post(url, {});
+    return axios.post(url, artistRequest);
 };
 
 export const fetchArtists = (pageable: Pageable) => {
@@ -14,3 +14,13 @@ export const fetchArtists = (pageable: Pageable) => {
     const queryParams = pageableQueryParams(pageable);
     return axios.get(url, {params: queryParams});
 };
+
+export const fetchArtistCategories = () => {
+    const url = `${root}/category`;
+    return axios.get(url);
+};
+
+export interface ArtistRequest {
+    category: string | null,
+    specialities: []
+}

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';
 
@@ -11,6 +11,7 @@ import App from './App';
 import authReducer from './store/reducers/auth';
 import uiReducer from './store/reducers/ui';
 import artistReducer from './store/reducers/artist';
+import i18nReducer from './store/reducers/i18n';
 
 
 // @ts-ignore
@@ -19,7 +20,8 @@ const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDU
 const rootReducer = combineReducers({
     auth: authReducer,
     ui: uiReducer,
-    artist: artistReducer
+    artist: artistReducer,
+    i18n: i18nReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

@@ -1,7 +1,7 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Artist} from '../../models/artist.model';
+import {Artist} from '../../../models/artist.model';
 import Card from '@material-ui/core/Card';
 import classes from './ArtistCard.module.scss';
 
@@ -19,6 +19,11 @@ const ArtistCard = (props: Props) => {
                 <Col sm={12}>
                     <div className={classes.Content}>
                         (<strong>{props.artist.id}</strong>) {props.artist.firstName} {props.artist.lastName}
+                    </div>
+                </Col>
+                <Col sm={12}>
+                    <div className={classes.Content}>
+                        <strong>{props.artist.category}</strong>
                     </div>
                 </Col>
             </Row>

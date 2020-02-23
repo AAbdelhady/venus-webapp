@@ -15,20 +15,20 @@ const lazyLoadedDashboard = withLazyLoad(() => import('./pages/dashboard/Dashboa
 
 const authorizedUserRoutes = (authorizedUser: User) => {
     return authorizedUser ? [
-        <Route key="profile" path="/profile" component={ProfilePage}/>
+        <Route key="profile" path="/:lang?/profile" component={ProfilePage}/>
     ] : null;
 };
 
 const artistOnlyRoutes = (authorizedUser: User) => {
     return (authorizedUser?.role === Role.ARTIST) ? [
-        <Route key="dashboard" path="/dashboard" component={lazyLoadedDashboard}/>
+        <Route key="dashboard" path="/:lang?/dashboard" component={lazyLoadedDashboard}/>
     ] : null;
 };
 
 const customerOnlyRoutes = (authorizedUser: User) => {
     return (authorizedUser?.role === Role.CUSTOMER) ? [
-        <Route key="search" path="/search" component={SearchPage}/>,
-        <Route key="artist" path="/artist/:id" component={ArtistPage}/>
+        <Route key="search" path="/:lang?/search" component={SearchPage}/>,
+        <Route key="artist" path="/:lang?/artist/:id" component={ArtistPage}/>
     ] : null;
 };
 
@@ -38,8 +38,9 @@ const routes: React.FC = (props: any) => {
             {authorizedUserRoutes(props.authorizedUser)}
             {artistOnlyRoutes(props.authorizedUser)}
             {customerOnlyRoutes(props.authorizedUser)}
-            <Route path="/test" component={TestPage}/>
+            <Route path="/:lang?/test" component={TestPage}/>
             <Route path="/redirect" component={RedirectPage}/>
+            <Route path="/:lang" component={HomePage}/>
             <Route path="/" exact component={HomePage}/>
             <Route component={NotFoundPage}/>
         </Switch>

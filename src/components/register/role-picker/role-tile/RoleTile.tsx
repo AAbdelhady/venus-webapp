@@ -1,7 +1,7 @@
 import React from 'react';
-import classes from './RegisterTile.module.scss';
+import classes from './RoleTile.module.scss';
 
-const RegisterTile = (props) => {
+const RoleTile = (props) => {
     return (
         <div className={classes.Container} onClick={props.click}>
             {props.children}
@@ -10,4 +10,4 @@ const RegisterTile = (props) => {
     )
 };
 
-export default RegisterTile;
+export default RoleTile;

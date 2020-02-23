@@ -13,3 +13,7 @@ export const ARTIST = {
   SEARCH_SUCCESS: 'ARTIST_SEARCH_SUCCESS',
   SEARCH_FAIL: 'ARTIST_SEARCH_FAIL'
 };
+
+export const I18N = {
+    CHANGE_LANG: 'CHANGE_LANG'
+};

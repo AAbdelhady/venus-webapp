@@ -2,37 +2,37 @@ import {AUTH as authActionTypes} from '../actions/actionTypes';
 import {updateObject} from '../../utils/common';
 import {User} from "../../models/user.model";
 
-interface AuthState {
+interface State {
     user: User | null,
     error: any
 }
 
-const initialState: AuthState = {
+const initialState: State = {
     user: null,
     error: null
 };
 
-const authStart = (state: AuthState, action) => {
+const authStart = (state: State, action) => {
     return updateObject(state, {
         error: null
     });
 };
 
-const authSuccess = (state: AuthState, action) => {
+const authSuccess = (state: State, action) => {
     return updateObject(state, {
         user: action.user,
         error: null
     });
 };
 
-const authFail = (state: AuthState, action) => {
+const authFail = (state: State, action) => {
     return updateObject(state, {
         user: null,
         error: action.error
     });
 };
 
-const reducer = (state: AuthState = initialState, action) => {
+const reducer = (state: State = initialState, action) => {
     switch (action.type) {
         case authActionTypes.START:
             return authStart(state, action);

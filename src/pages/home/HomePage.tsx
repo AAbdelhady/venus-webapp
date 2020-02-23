@@ -1,15 +1,21 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, RouteComponentProps} from 'react-router-dom';
 import logo from "../../assets/logo.svg";
 import classes from './Home.module.scss';
-import {googleLogin, facebookLogin} from '../../utils/common';
+import {facebookLogin, googleLogin} from '../../utils/common';
 import Layout from "../../hoc/layout/Layout";
 import {logoutLink} from '../../utils/constants';
 import Notifier from '../../components/notifier/Notifier';
 import {Subject} from 'rxjs';
+import {User} from '../../models/user.model';
 
-class HomePage extends Component<any> {
+interface Props {
+    authorizedUser: User;
+    history: RouteComponentProps;
+}
+
+class HomePage extends Component<Props> {
 
     notifierSubject = new Subject();
 
@@ -20,11 +26,11 @@ class HomePage extends Component<any> {
                 <h3><a href="/" onClick={googleLogin}>Google</a> <a href="/" onClick={facebookLogin}>Facebook</a></h3>
             </div>
         );
-        const authenticatedPersonSection = this.props.authenticatedUser
-            ? <h3>Authenticated user is {this.props.authenticatedUser.firstName} {this.props.authenticatedUser.lastName} <a href={logoutLink}>Logout</a></h3>
+        const authenticatedPersonSection = this.props.authorizedUser
+            ? <h3>Authenticated user is {this.props.authorizedUser.firstName} {this.props.authorizedUser.lastName} <a href={logoutLink}>Logout</a></h3>
             : loginLinks;
         return (
-            <Layout>
+            <Layout activeRoute={this.props.history}>
                 <div className={classes.App}>
                     <header className={classes.AppHeader}>
                         {authenticatedPersonSection}

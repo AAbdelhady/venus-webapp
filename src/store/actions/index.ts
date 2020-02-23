@@ -3,7 +3,8 @@ export {
 } from './auth';
 
 export {
-    register
+    registerArtist,
+    registerCustomer,
 } from './register';
 
 export {
@@ -13,4 +14,9 @@ export {
 
 export {
     searchArtists
-} from './artist'
+} from './artist';
+
+export {
+    changeLanguage,
+    setLanguageFromRoute
+} from './i18n';
