@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import NavigationItem from '../navigation-item/NavigationItem';
+import NavItem from '../nav-item/NavItem';
 import Login from '../../../login/Login';
 
 const LoggedOutAuthNavItem = () => {
     const [showLogin, setShowLogin] = useState(false);
     return (
         <>
-            <NavigationItem key="login" clicked={() => setShowLogin(true)}>Login | Sign up</NavigationItem>
+            <NavItem key="login" clicked={() => setShowLogin(true)}>Login | Sign up</NavItem>
             <Login show={showLogin} back={() => setShowLogin(false)}/>
         </>
     );

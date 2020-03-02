@@ -13,3 +13,12 @@
         flex-flow: row;
     }
 }
+
+.NavItemSkeletonContainer {
+  padding: 5px;
+
+  & span {
+    background: blue;
+    width: 100px;
+  }
+}

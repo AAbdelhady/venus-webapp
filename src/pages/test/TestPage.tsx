@@ -25,7 +25,7 @@ class TestPage extends Component<any> {
                 </div>
                 <Select value={this.props.currentLang} onChange={event => this.props.changeLanguage(event.target.value, this.props.history)}>
                     <MenuItem value={'en'}>ENG</MenuItem>
-                    <MenuItem value={'ee'}>EST</MenuItem>
+                    <MenuItem value={'et'}>EST</MenuItem>
                     <MenuItem value={'ru'}>RUS</MenuItem>
                 </Select>
             </>

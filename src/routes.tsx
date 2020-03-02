@@ -26,10 +26,7 @@ const artistOnlyRoutes = (authorizedUser: User) => {
 };
 
 const customerOnlyRoutes = (authorizedUser: User) => {
-    return (authorizedUser?.role === Role.CUSTOMER) ? [
-        <Route key="search" path="/:lang?/search" component={SearchPage}/>,
-        <Route key="artist" path="/:lang?/artist/:id" component={ArtistPage}/>
-    ] : null;
+    return (authorizedUser?.role === Role.CUSTOMER) ? [] : null;
 };
 
 const routes: React.FC = (props: any) => {
@@ -38,8 +35,10 @@ const routes: React.FC = (props: any) => {
             {authorizedUserRoutes(props.authorizedUser)}
             {artistOnlyRoutes(props.authorizedUser)}
             {customerOnlyRoutes(props.authorizedUser)}
+            <Route key="search" path="/:lang?/search" component={SearchPage}/>
+            <Route key="artist" path="/:lang?/artist/:id" component={ArtistPage}/>
             <Route path="/:lang?/test" component={TestPage}/>
-            <Route path="/redirect" component={RedirectPage}/>
+            <Route path="/redirect" exact component={RedirectPage}/>
             <Route path="/:lang" component={HomePage}/>
             <Route path="/" exact component={HomePage}/>
             <Route component={NotFoundPage}/>

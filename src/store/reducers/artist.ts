@@ -4,31 +4,58 @@ import {Artist} from '../../models/artist.model';
 import {Page} from '../../models/page.model';
 
 interface State {
-    artistPage: Page<Artist> | null,
-    error: any
+    artistList: Array<Artist>;
+    currentPageNumber: number;
+    totalElements: number;
+    error: any;
+    loading: boolean;
+}
+
+interface SearchSuccessAction {
+    artistPage: Page<Artist>;
+    pageNumber: number;
 }
 
 const initialState: State = {
-    artistPage: null,
-    error: null
+    artistList: [],
+    currentPageNumber: 0,
+    totalElements: 0,
+    error: null,
+    loading: false
 };
 
-const searchSuccess = (state: State, action) => {
+const searchStart = (state: State) => {
     return updateObject(state, {
-        artistPage: action.artistPage,
+        loading: true,
+        error: null
+    });
+};
+
+const searchSuccess = (state: State, action: SearchSuccessAction) => {
+    const initialList: Array<Artist> = action.pageNumber !== 0 ? state.artistList : [];
+    const updatedList = initialList.concat(action.artistPage.content);
+    return updateObject(state, {
+        artistList: updatedList,
+        currentPageNumber: action.pageNumber,
+        totalElements: action.artistPage.totalElements,
+        loading: false,
         error: null
     });
 };
 
 const searchFail = (state: State, action) => {
     return updateObject(state, {
-        artistPage: null,
+        artistPage: state.artistList,
+        totalElements: 0,
+        loading: false,
         error: action.error
     });
 };
 
 const reducer = (state: State = initialState, action) => {
     switch (action.type) {
+        case artistActionTypes.SEARCH_START:
+            return searchStart(state);
         case artistActionTypes.SEARCH_SUCCESS:
             return searchSuccess(state, action);
         case artistActionTypes.SEARCH_FAIL:

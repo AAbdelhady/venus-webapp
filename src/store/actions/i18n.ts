@@ -3,22 +3,31 @@ import {I18N as i18nTypes} from './actionTypes';
 import {DEFAULT_LANG, isSupportedLang, Lang, langParam} from '../../i18n/lang';
 import i18n from '../../i18n/i18n';
 import axios from '../../axios';
-import {headerNames} from '../../utils/constants';
+import {persistState} from '../../index';
 
-export const changeLanguage = (lang: Lang, activeRoute: RouteComponentProps) => {
-    updateLangParamInRoute(lang, activeRoute);
-    i18n.changeLanguage(lang);
-    updateLangHeader(lang);
+export const langChange = (lang: Lang) => {
     return {
         type: i18nTypes.CHANGE_LANG,
         lang: lang
     };
 };
 
+export const changeLanguage = (lang: Lang, history: RouteComponentProps) => {
+    return dispatch => {
+        dispatch(langChange(lang));
+        persistState();
+        updateLangParamInRoute(lang, history);
+        window.location.reload();
+    }
+};
+
 export const setLanguageFromRoute = (history: RouteComponentProps) => {
     return dispatch => {
         let lang = extractLangFromPath(history.location.pathname);
-        dispatch(changeLanguage(lang, history));
+        dispatch(langChange(lang));
+        updateAxiosLangQueryParam(lang);
+        i18n.changeLanguage(lang).then(() => console.log(`language extracted from url [${lang}]`));
+        return new Promise(resolve => resolve());
     }
 };
 
@@ -32,12 +41,11 @@ const updateLangParamInRoute = (newLang: Lang, activeRoute) => {
     activeRoute.push(newPathname);
 };
 
-const updateLangHeader = (lang) => {
+const updateAxiosLangQueryParam = (lang) => {
     axios.interceptors.request.use(req => {
-            req.headers[headerNames.acceptLanguage] = lang;
-            return req;
-        }
-    );
+        req.params = {...req.params, lang: lang};
+        return req;
+    });
 };
 
 const extractLangFromPath = (pathname) => {

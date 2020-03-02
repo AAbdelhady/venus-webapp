@@ -3,17 +3,20 @@ import {updateObject} from '../../utils/common';
 import {User} from "../../models/user.model";
 
 interface State {
-    user: User | null,
-    error: any
+    user: User | null;
+    loading: boolean;
+    error: any;
 }
 
 const initialState: State = {
     user: null,
+    loading: false,
     error: null
 };
 
 const authStart = (state: State, action) => {
     return updateObject(state, {
+        loading: true,
         error: null
     });
 };
@@ -21,6 +24,7 @@ const authStart = (state: State, action) => {
 const authSuccess = (state: State, action) => {
     return updateObject(state, {
         user: action.user,
+        loading: false,
         error: null
     });
 };
@@ -28,6 +32,7 @@ const authSuccess = (state: State, action) => {
 const authFail = (state: State, action) => {
     return updateObject(state, {
         user: null,
+        loading: false,
         error: action.error
     });
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
-import classes from './NavigationItem.module.scss';
+import classes from './NavItem.module.scss';
 
 class Props {
     link?: string;
@@ -10,7 +10,7 @@ class Props {
     clicked?
 }
 
-const NavigationItem = (props: Props) => {
+const NavItem = (props: Props) => {
     const handleClick = (event) => {
         event.preventDefault();
         props.clicked(event);
@@ -19,4 +19,4 @@ const NavigationItem = (props: Props) => {
     return <li className={classes.NavigationItem}>{link}</li>;
 };
 
-export default NavigationItem;
+export default NavItem;

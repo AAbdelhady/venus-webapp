@@ -2,16 +2,10 @@ import React from 'react';
 import classes from './ArtistCategoryPicker.module.scss';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-
-interface Category {
-    value: string;
-    text: string;
-    photoUrl: string;
-}
+import {Category} from '../../../../models/category.model';
 
 interface Props {
     categories: Category[],
-
     submit(category: string);
 }
 

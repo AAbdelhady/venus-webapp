@@ -1,18 +1,18 @@
 import {I18N as i18nActionTypes} from '../actions/actionTypes';
 import {updateObject} from '../../utils/common';
-import {DEFAULT_LANG, Lang, langPrefix} from '../../i18n/lang';
+import {Lang, langPrefix} from '../../i18n/lang';
 
 interface State {
-    lang: Lang,
-    langPrefix: string
+    lang: Lang | null;
+    langPrefix: string;
 }
 
 const initialState: State = {
-    lang: DEFAULT_LANG,
+    lang: null,
     langPrefix: ''
 };
 
-const changeLanguage = (state: State, action) => {
+const setLanguage = (state: State, action) => {
     return updateObject(state, {
         lang: action.lang,
         langPrefix: langPrefix(action.lang)
@@ -22,7 +22,7 @@ const changeLanguage = (state: State, action) => {
 const reducer = (state: State = initialState, action) => {
     switch (action.type) {
         case i18nActionTypes.CHANGE_LANG:
-            return changeLanguage(state, action);
+            return setLanguage(state, action);
         default:
             return state;
     }

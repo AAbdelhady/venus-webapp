@@ -10,6 +10,7 @@ import {RouteComponentProps} from 'react-router';
 
 interface Props {
     authorizedUser: User;
+    authLoading: boolean;
     activeRoute: RouteComponentProps;
 }
 
@@ -39,7 +40,7 @@ class Layout extends Component<Props> {
     render () {
         return (
             <>
-                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} authorizedUser={this.props.authorizedUser} activeRoute={this.props.activeRoute}/>
+                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} authorizedUser={this.props.authorizedUser} authLoading={this.props.authLoading} activeRoute={this.props.activeRoute}/>
                 <SideDrawer
                     open={this.state.showSideDrawer}
                     opened={this.sideDrawerOpenedHandler}
@@ -55,7 +56,8 @@ class Layout extends Component<Props> {
 
 const mapStateToProps = state => {
     return {
-        authorizedUser: state.auth.user
+        authorizedUser: state.auth.user,
+        authLoading: state.auth.loading
     }
 };
 

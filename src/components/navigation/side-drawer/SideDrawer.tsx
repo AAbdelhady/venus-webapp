@@ -1,7 +1,7 @@
 import React from 'react';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import logo from '../../../assets/small-logo.png';
-import NavigationItems from '../navigation-items/NavigationItems';
+import NavItems from '../nav-items/NavItems';
 import classes from './SideDrawer.module.scss';
 
 const SideDrawer = ( props ) => {
@@ -11,7 +11,7 @@ const SideDrawer = ( props ) => {
                 <img src={logo} alt="logo"/>
             </div>
             <nav className={classes.Nav}>
-                <NavigationItems authorizedUser={props.authorizedUser}/>
+                <NavItems authorizedUser={props.authorizedUser}/>
             </nav>
         </SwipeableDrawer>
     );

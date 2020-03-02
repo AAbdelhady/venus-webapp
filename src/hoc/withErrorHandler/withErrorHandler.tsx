@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Dialog from '../dialog/Dialog';
 import {ZIndex} from '../../utils/enums';
 import classes from './withErrorHandler.module.scss';
 
-const withErrorHandler: any = ( WrappedComponent, axios ) => {
+const withErrorHandler: any = (WrappedComponent, axios) => {
 
     return class extends Component {
 
@@ -18,16 +18,16 @@ const withErrorHandler: any = ( WrappedComponent, axios ) => {
             this.initInterceptors();
         }
 
-        componentWillUnmount () {
+        componentWillUnmount() {
             this.ejectInterceptors();
         }
 
         errorConfirmedHandler = () => {
-            this.setState( { error: null } );
+            this.setState({error: null});
         };
 
         get showError(): boolean {
-            return this.state.error && this.state.error?.response?.status !== 401;
+            return !!(this.state.error && (this.state.error?.response?.status !== 401));
         }
 
         get errorMessage() {
@@ -44,22 +44,22 @@ const withErrorHandler: any = ( WrappedComponent, axios ) => {
         }
 
         private initInterceptors() {
-            this.reqInterceptor = axios.interceptors.request.use( req => {
-                this.setState( { error: null } );
+            this.reqInterceptor = axios.interceptors.request.use(req => {
+                this.setState({error: null});
                 return req;
-            } );
-            this.resInterceptor = axios.interceptors.response.use( res => res, error => {
-                this.setState( { error: error } );
+            });
+            this.resInterceptor = axios.interceptors.response.use(res => res, error => {
+                this.setState({error: error});
                 throw error;
-            } );
+            });
         }
 
         private ejectInterceptors() {
-            axios.interceptors.request.eject( this.reqInterceptor );
-            axios.interceptors.response.eject( this.resInterceptor );
+            axios.interceptors.request.eject(this.reqInterceptor);
+            axios.interceptors.response.eject(this.resInterceptor);
         }
 
-        render () {
+        render() {
             return (
                 <>
                     <Dialog open={this.showError} onClose={this.errorConfirmedHandler} zIndex={ZIndex.errorHandlerDialog}>

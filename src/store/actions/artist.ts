@@ -1,14 +1,20 @@
 import {ARTIST as artistActionTypes} from './actionTypes';
-import {showLoadingOverlay, hideLoadingOverlay} from "./ui";
 import {Pageable} from '../../models/pageable.model';
 import {fetchArtists} from '../../api/artist.api';
 import {Artist} from '../../models/artist.model';
 import {Page} from '../../models/page.model';
 
-export const searchSuccess = (artistPage: Page<Artist>) => {
+export const searchStart = () => {
+    return {
+        type: artistActionTypes.SEARCH_START
+    };
+};
+
+export const searchSuccess = (artistPage: Page<Artist>, pageNumber: number) => {
     return {
         type: artistActionTypes.SEARCH_SUCCESS,
-        artistPage: artistPage
+        artistPage: artistPage,
+        pageNumber: pageNumber
     };
 };
 
@@ -19,15 +25,16 @@ export const searchFail = (error) => {
     };
 };
 
-export const searchArtists = (pageable: Pageable) => {
+export const searchArtists = (pageable: Pageable, category: string) => {
     return dispatch => {
-        dispatch(showLoadingOverlay());
-        fetchArtists(pageable)
-            .then(response => dispatch(searchSuccess(response.data)))
+        dispatch(searchStart());
+        fetchArtists(pageable, category)
+            .then(response => {
+                dispatch(searchSuccess(response.data, pageable.pageNumber));
+            })
             .catch(err => {
                 dispatch(searchFail(err));
                 throw err;
-            })
-            .finally(() => dispatch(hideLoadingOverlay()));
+            });
     };
 };

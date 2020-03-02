@@ -1,0 +1,13 @@
+@import '../../assets/css/variables';
+
+.FloatingBottomRight {
+  bottom: 20px;
+  right: 20px;
+}
+
+@media (min-width: $md-breakpoint) {
+  .FloatingBottomRight {
+    bottom: 40px;
+    right: 60px;
+  }
+}

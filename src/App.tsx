@@ -10,32 +10,39 @@ import {Role} from './models/user.model';
 import {ThemeProvider} from '@material-ui/styles';
 import {theme} from './utils/theme';
 import './i18n/i18n';
-import {Translation} from 'react-i18next';
+
+interface State {
+    isLangInitFromRoute: boolean;
+}
 
 class App extends React.Component<any> {
 
+    state: State = {
+        isLangInitFromRoute: false
+    };
+
     componentDidMount(): void {
         this.props.fetchAuthorizedUser();
-        this.props.setLanguageFromRoute(this.props.history);
+        this.props.setLanguageFromRoute(this.props.history).then(() => {
+            this.setState({isLangInitFromRoute: true})
+        });
     }
 
     render() {
-        return (
+        return this.state.isLangInitFromRoute ?
             <ThemeProvider theme={theme}>
                 <Routes/>
-                <Translation>{t => <strong>{t('React')}</strong>}</Translation>
                 <Loading show={this.props.showLoading}/>
                 <Register show={this.props.showRegister}/>
             </ThemeProvider>
-        )
+            : null;
     };
 }
 
 const mapStateToProps = state => {
     return {
         showLoading: state.ui.showLoading,
-        showRegister: state.auth.user?.role === Role.UNSPECIFIED,
-        lang: state.i18n.lang
+        showRegister: state.auth.user?.role === Role.UNSPECIFIED
     };
 };
 

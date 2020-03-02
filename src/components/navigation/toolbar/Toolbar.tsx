@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import classes from './Toolbar.module.scss';
 import logo from '../../../assets/small-logo.png';
-import NavigationItems from '../navigation-items/NavigationItems';
+import NavItems from '../nav-items/NavItems';
 import DrawerToggle from '../side-drawer/drawer-toggle/DrawerToggle';
 import LangSelector from '../../lang-selector/LangSelector';
 import {User} from '../../../models/user.model';
@@ -11,8 +11,8 @@ import {NavLink} from 'react-router-dom';
 
 interface Props {
     authorizedUser: User;
+    authLoading: boolean;
     activeRoute: RouteComponentProps;
-
     drawerToggleClicked();
 }
 
@@ -26,7 +26,7 @@ const Toolbar = (props: Props) => {
             </NavLink>
             <LangSelector activeRoute={props.activeRoute}/>
             <nav className={classes.DesktopOnly}>
-                <NavigationItems authorizedUser={props.authorizedUser} langPrefix={langPrefix}/>
+                <NavItems authorizedUser={props.authorizedUser} authLoading={props.authLoading} langPrefix={langPrefix}/>
             </nav>
         </header>
     );

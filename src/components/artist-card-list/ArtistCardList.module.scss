@@ -1,3 +1,7 @@
-.Card {
-  margin: 0 20px 20px;
+.ScrollContainer {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
 }

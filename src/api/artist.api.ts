@@ -9,10 +9,18 @@ export const registerAsArtist = (artistRequest: ArtistRequest) => {
     return axios.post(url, artistRequest);
 };
 
-export const fetchArtists = (pageable: Pageable) => {
+export const fetchArtists = (pageable: Pageable, category?: string) => {
     const url = `${root}`;
-    const queryParams = pageableQueryParams(pageable);
+    let queryParams: any = pageableQueryParams(pageable);
+    if (category) {
+        queryParams = {...queryParams, category: category};
+    }
     return axios.get(url, {params: queryParams});
+};
+
+export const fetchArtistById = (id: number) => {
+    const url = `${root}/${id}`;
+    return axios.get(url);
 };
 
 export const fetchArtistCategories = () => {

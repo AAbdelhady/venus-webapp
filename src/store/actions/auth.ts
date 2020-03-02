@@ -1,6 +1,5 @@
 import {fetchAuthenticatedUser} from '../../api/user.api';
 import {AUTH as authActionTypes} from './actionTypes';
-import {showLoadingOverlay, hideLoadingOverlay} from "./ui";
 
 export const authStart = () => {
     return {
@@ -24,14 +23,14 @@ export const authFail = (error) => {
 
 export const auth = () => {
     return dispatch => {
-        dispatch(showLoadingOverlay());
         dispatch(authStart());
         fetchAuthenticatedUser()
             .then(response => dispatch(authSuccess(response.data)))
             .catch(err => {
                 dispatch(authFail(err));
-                throw err;
-            })
-            .finally(() => dispatch(hideLoadingOverlay()));
+                if (err?.response?.status !== 401) {
+                    throw err;
+                }
+            });
     };
 };

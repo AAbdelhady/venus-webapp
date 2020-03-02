@@ -12,7 +12,7 @@ import authReducer from './store/reducers/auth';
 import uiReducer from './store/reducers/ui';
 import artistReducer from './store/reducers/artist';
 import i18nReducer from './store/reducers/i18n';
-
+import {popStateFromLocalStorage, pushStateToLocalStorage} from './utils/localStorage';
 
 // @ts-ignore
 const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
@@ -24,9 +24,15 @@ const rootReducer = combineReducers({
     i18n: i18nReducer
 });
 
-const store = createStore(rootReducer, composeEnhancers(
+const persistedState = popStateFromLocalStorage();
+
+const store = createStore(rootReducer, persistedState, composeEnhancers(
     applyMiddleware(thunk)
 ));
+
+export const persistState = () => {
+    pushStateToLocalStorage(store.getState());
+};
 
 const app = (
     <Provider store={store}>

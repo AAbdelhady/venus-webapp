@@ -1,8 +1,8 @@
-import {ee, en, ru} from './lang';
+import {en, et, ru} from './lang';
 
 const resources = {
     en: en,
-    ee: ee,
+    et: et,
     ru: ru
 };
 
