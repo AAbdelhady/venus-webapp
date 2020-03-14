@@ -23,6 +23,9 @@ class Register extends Component<Props> {
 
     pickRole = (role: Role) => {
         this.setState({role: role});
+        if (role === Role.CUSTOMER) {
+            this.props.registerCustomer();
+        }
     };
 
     backToPickRole = () => {
@@ -36,8 +39,6 @@ class Register extends Component<Props> {
         }
         if (this.state.role === Role.CUSTOMER) {
             // content = <h1 onClick={this.backToPickRole}>CUSTOMER</h1>
-            this.props.registerCustomer();
-            window.location.reload();
         }
 
         return (
