@@ -1,6 +1,8 @@
 @import "../../assets/css/variables";
 
-$facebook-blue: #4568b2;
+.Container {
+  min-width: 50%;
+}
 
 .ButtonContainer {
   padding: 10px;
@@ -8,8 +10,4 @@ $facebook-blue: #4568b2;
   & button {
     width: 100%;
   }
-}
-
-.FacebookLogo {
-  color: $facebook-blue;
 }

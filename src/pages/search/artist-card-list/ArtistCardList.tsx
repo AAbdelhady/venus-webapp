@@ -4,7 +4,7 @@ import classes from './ArtistCardList.module.scss';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import {Artist} from '../../models/artist.model';
+import {Artist} from '../../../models/artist.model';
 import ArtistCardSkeleton from './artist-card/ArtistCardSkeleton';
 
 interface Props {

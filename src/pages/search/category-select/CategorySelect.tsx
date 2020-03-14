@@ -1,5 +1,5 @@
 import React from 'react';
-import {Category} from '../../models/category.model';
+import {Category} from '../../../models/category.model';
 import Select from '@material-ui/core/Select';
 import classes from './CategorySelect.module.scss';
 

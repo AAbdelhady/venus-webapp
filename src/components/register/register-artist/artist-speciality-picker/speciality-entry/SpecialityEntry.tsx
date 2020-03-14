@@ -1,5 +1,4 @@
 import React from 'react';
-import {Speciality} from '../../../../../models/speciality.model';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {TextField} from '@material-ui/core';
@@ -8,6 +7,12 @@ import ns from '../../../../../i18n/namespace';
 import Button from '@material-ui/core/Button';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
+import {formHasErrors} from '../../../../../utils/common';
+
+interface SpecialityForm {
+    name: string;
+    price: number;
+}
 
 const specialityFormSchema = Yup.object().shape({
     name: Yup.string().required('Required'),
@@ -15,14 +20,13 @@ const specialityFormSchema = Yup.object().shape({
 });
 
 interface Props {
-    add(speciality: Speciality);
-
-    remove(speciality: Speciality);
+    add(speciality: SpecialityForm);
+    remove(speciality: SpecialityForm);
 }
 
 const SpecialityEntry = (props: Props) => {
     const {t} = useTranslation(ns.register);
-    const formik = useFormik<Speciality>({
+    const formik = useFormik<SpecialityForm>({
         initialValues: {
             name: '',
             price: 0
@@ -30,7 +34,7 @@ const SpecialityEntry = (props: Props) => {
         validationSchema: specialityFormSchema,
         onSubmit: (event) => addSpeciality(event)
     });
-    const addSpeciality = (speciality: Speciality) => {
+    const addSpeciality = (speciality: SpecialityForm) => {
         props.add(speciality);
         formik.resetForm();
     };
@@ -45,7 +49,7 @@ const SpecialityEntry = (props: Props) => {
                     <TextField name="price" type="number" label={t('SPECIALITY_ENTRY.PRICE')} variant="outlined" onChange={formik.handleChange} value={formik.values.price}/>
                 </Col>
                 <Col sm={{span: 1, offset: 2}}>
-                    <Button color="primary" type="submit" disabled={!!Object.keys(formik.errors).length || !formik.dirty}>+</Button>
+                    <Button color="primary" type="submit" disabled={formHasErrors(formik)}>+</Button>
                 </Col>
             </Row>
             {JSON.stringify(formik.errors)}

@@ -34,7 +34,7 @@ const Dialog = (props: Props) => {
         <MuiDialog open={props.open} onClose={props.onClose} keepMounted TransitionComponent={Transition} fullScreen={fullScreen} maxWidth={false} style={style}>
             {dialogTitle(props.title)}
             <DialogContent>
-                {props.children}
+                {props.open && props.children}
             </DialogContent>
         </MuiDialog>
     )

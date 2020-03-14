@@ -25,3 +25,11 @@ const login = (event: any, suffix: string) => {
 export const join = (...strings: string[]): string => {
     return strings.join(' ');
 };
+
+export const formHasErrors = (formik: any) => {
+    return !!Object.keys(formik.errors).length || !formik.dirty;
+};
+
+export const random = () => {
+    return Math.floor(Math.random() * 1000000);
+};

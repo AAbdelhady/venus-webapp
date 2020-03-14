@@ -10,3 +10,5 @@ export enum Role {
     CUSTOMER = 'CUSTOMER',
     UNSPECIFIED = 'UNSPECIFIED'
 }
+
+export const CUSTOMER: Role = Role.CUSTOMER;

@@ -5,14 +5,22 @@
   width: 100%;
 }
 
+.Body {
+  padding: 0 50px 50px;
+}
+
 .NameContainer {
-  padding: 50px;
+  padding: 40px 0;
 }
 
 .GalleryContainer {
-  padding: 50px;
+  //padding: 50px;
 }
 
 .GalleryItemContainer {
   padding: 10px;
+}
+
+.SpecialityListContainer {
+  margin: 50px 0;
 }

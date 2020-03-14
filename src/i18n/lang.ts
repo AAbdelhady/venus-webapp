@@ -6,6 +6,10 @@ import register_en from '../assets/i18n/en/register.json';
 import register_et from '../assets/i18n/et/register.json';
 import register_ru from '../assets/i18n/ru/register.json';
 
+import booking_en from '../assets/i18n/en/booking.json';
+import booking_et from '../assets/i18n/et/booking.json';
+import booking_ru from '../assets/i18n/ru/booking.json';
+
 export const supportedLangs = ['en', 'et', 'ru'] as const;
 export type Lang = (typeof supportedLangs)[number];
 
@@ -17,17 +21,20 @@ export const langPrefix = (lang: Lang) => {
 
 export const en = {
     common: common_en,
-    register: register_en
+    register: register_en,
+    booking: booking_en
 };
 
 export const et = {
     common: common_et,
-    register: register_et
+    register: register_et,
+    booking: booking_et
 };
 
 export const ru = {
     common: common_ru,
-    register: register_ru
+    register: register_ru,
+    booking: booking_ru
 };
 
 

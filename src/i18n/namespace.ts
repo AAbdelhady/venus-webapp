@@ -1,9 +1,7 @@
-export const common = "common";
-export const register = "register";
-
 const ns = {
     common: "common",
-    register: "register"
+    register: "register",
+    booking: "booking"
 };
 
 export const namespaces = () => {

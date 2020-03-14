@@ -35,7 +35,9 @@ class Register extends Component<Props> {
             content = <RegisterArtist register={this.props.registerArtist} back={this.backToPickRole}/>;
         }
         if (this.state.role === Role.CUSTOMER) {
-            content = <h1 onClick={this.backToPickRole}>CUSTOMER</h1>
+            // content = <h1 onClick={this.backToPickRole}>CUSTOMER</h1>
+            this.props.registerCustomer();
+            window.location.reload();
         }
 
         return (

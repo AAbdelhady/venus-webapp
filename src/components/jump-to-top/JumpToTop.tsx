@@ -1,13 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import Fab from '@material-ui/core/Fab';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import classes from './JumpToTop.module.scss';
-import {ZIndex} from '../../utils/enums';
-
-const style: React.CSSProperties = {
-    position: 'fixed',
-    zIndex: ZIndex.FAB
-};
+import FloatingButton from '../ui/floating-button/FloatingButton';
 
 const scrollToTop = () => {
     window.scrollTo({
@@ -17,9 +10,9 @@ const scrollToTop = () => {
 };
 
 const fab = (
-    <Fab color="primary" onClick={scrollToTop} className={classes.FloatingBottomRight} style={style}>
+    <FloatingButton onClick={scrollToTop}>
         <ArrowUpwardIcon/>
-    </Fab>
+    </FloatingButton>
 );
 
 const JumpToTop = () => {

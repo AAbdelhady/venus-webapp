@@ -5,12 +5,12 @@ import * as actions from '../../store/actions/index';
 import Layout from "../../hoc/layout/Layout";
 import {Pageable, Sort} from '../../models/pageable.model';
 import {Artist} from '../../models/artist.model';
-import ArtistCardList from '../../components/artist-card-list/ArtistCardList';
+import ArtistCardList from './artist-card-list/ArtistCardList';
 import classes from './SearchPage.module.scss';
 import JumpToTop from '../../components/jump-to-top/JumpToTop';
 import {fetchArtistCategories} from '../../api/artist.api';
 import {Category} from '../../models/category.model';
-import CategorySelect from '../../components/category-select/CategorySelect';
+import CategorySelect from './category-select/CategorySelect';
 
 const PAGE_SIZE = 20;
 

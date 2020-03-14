@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Artist} from '../../../models/artist.model';
+import {Artist} from '../../../../models/artist.model';
 import Card from '@material-ui/core/Card';
 import classes from './ArtistCard.module.scss';
 import {NavLink} from 'react-router-dom';
