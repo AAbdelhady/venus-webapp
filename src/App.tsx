@@ -7,6 +7,8 @@ import Loading from './components/loading/Loading';
 import Register from './components/register/Register';
 import * as actions from './store/actions/index';
 import {Role} from './models/user.model';
+import {ThemeProvider} from '@material-ui/styles';
+import {theme} from './utils/theme';
 import './i18n/i18n';
 
 interface State {
@@ -28,11 +30,11 @@ class App extends React.Component<any> {
 
     render() {
         return this.state.isLangInitFromRoute ?
-            <>
+            <ThemeProvider theme={theme}>
                 <Routes/>
                 <Loading show={this.props.showLoading}/>
                 <Register show={this.props.showRegister}/>
-            </>
+            </ThemeProvider>
             : null;
     };
 }
