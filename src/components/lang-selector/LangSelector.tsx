@@ -2,9 +2,9 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {supportedLangs} from '../../i18n/lang';
 import * as actions from '../../store/actions';
-import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import {RouteComponentProps} from 'react-router';
+import classes from "./LangSelector.module.scss";
 
 interface Props {
     history: RouteComponentProps;
@@ -20,12 +20,12 @@ const LangSelector = (props: Props) => {
         }
     };
 
+    const className = (lang) => lang === currentLang ? classes.Active : classes.Inactive;
+
     const buttons = supportedLangs.map(lang => (
-        <Button key={lang}
-                onClick={() => changeLang(lang)}
-                color={lang === currentLang ? 'primary' : 'secondary'}>
+        <div key={lang} onClick={() => changeLang(lang)} className={className(lang)}>
             {lang.toUpperCase()}
-        </Button>
+        </div>
     ));
 
     return (

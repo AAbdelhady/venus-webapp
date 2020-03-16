@@ -1,0 +1,17 @@
+@import "../../assets/css/variables";
+
+@mixin selector-btn {
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
+.Active {
+  @include selector-btn;
+  color: $secondary;
+}
+
+.Inactive {
+  @include selector-btn;
+  color: $primary-text;
+}

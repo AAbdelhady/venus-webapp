@@ -23,7 +23,7 @@ const roleSpecificNavs = (props) => {
 
 const prepareNavItem = (path: string, title: string, props) => {
     const currentPath = props.location.pathname;
-    if (currentPath && currentPath === path) {
+    if (currentPath && currentPath === (props.langPrefix + path)) {
         return null;
     }
     return <NavItem key={path} link={props.langPrefix + path}>{title}</NavItem>;
