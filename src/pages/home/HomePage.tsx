@@ -30,7 +30,7 @@ class HomePage extends Component<Props> {
             ? <h3>Authenticated user is {this.props.authorizedUser.firstName} {this.props.authorizedUser.lastName} <a href={logoutLink}>Logout</a></h3>
             : loginLinks;
         return (
-            <Layout activeRoute={this.props.history}>
+            <Layout history={this.props.history}>
                 <div className={classes.App}>
                     <header className={classes.AppHeader}>
                         {authenticatedPersonSection}

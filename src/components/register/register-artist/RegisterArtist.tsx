@@ -81,7 +81,6 @@ class RegisterArtist extends Component<Props> {
     get finishTemplate() {
         return (
             <div>
-                {JSON.stringify(this.state.artist)}
                 <Button variant="contained" color="primary" onClick={this.submit}>Finish</Button>
             </div>
         )

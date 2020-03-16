@@ -83,7 +83,7 @@ class SearchPage extends Component<Props> {
     render() {
         const artists = this.props.artistList ? this.props.artistList : [];
         return (
-            <Layout activeRoute={this.props.history}>
+            <Layout history={this.props.history}>
                 <div className={classes.Container}>
                     <div className={classes.CategorySelectContainer}>
                         <CategorySelect categories={this.state.categories} selected={this.state.currentCategory} onChange={this.onCategoryChanged}/>

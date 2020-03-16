@@ -11,7 +11,7 @@ import {RouteComponentProps} from 'react-router';
 interface Props {
     authorizedUser: User;
     authLoading: boolean;
-    activeRoute: RouteComponentProps;
+    history: RouteComponentProps;
 }
 
 interface LayoutState {
@@ -40,7 +40,7 @@ class Layout extends Component<Props> {
     render () {
         return (
             <>
-                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} authorizedUser={this.props.authorizedUser} authLoading={this.props.authLoading} activeRoute={this.props.activeRoute}/>
+                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} authorizedUser={this.props.authorizedUser} authLoading={this.props.authLoading} history={this.props.history}/>
                 <SideDrawer
                     open={this.state.showSideDrawer}
                     opened={this.sideDrawerOpenedHandler}

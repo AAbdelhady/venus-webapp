@@ -127,7 +127,7 @@ class ArtistPage extends Component<any> {
             </>
         );
         return (
-            <Layout activeRoute={this.props.history}>
+            <Layout history={this.props.history}>
                 {this.state.loading ? <ArtistPageSkeleton/> : pageContent}
             </Layout>
         );

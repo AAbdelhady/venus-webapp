@@ -12,7 +12,7 @@ import {NavLink} from 'react-router-dom';
 interface Props {
     authorizedUser: User;
     authLoading: boolean;
-    activeRoute: RouteComponentProps;
+    history: RouteComponentProps;
     drawerToggleClicked();
 }
 
@@ -24,7 +24,7 @@ const Toolbar = (props: Props) => {
             <NavLink to={langPrefix} exact className={classes.Logo}>
                 <img src={logo} alt="logo"/>
             </NavLink>
-            <LangSelector activeRoute={props.activeRoute}/>
+            <LangSelector history={props.history}/>
             <nav className={classes.DesktopOnly}>
                 <NavItems authorizedUser={props.authorizedUser} authLoading={props.authLoading} langPrefix={langPrefix}/>
             </nav>

@@ -52,7 +52,6 @@ const SpecialityEntry = (props: Props) => {
                     <Button color="primary" type="submit" disabled={formHasErrors(formik)}>+</Button>
                 </Col>
             </Row>
-            {JSON.stringify(formik.errors)}
         </form>
     );
 };

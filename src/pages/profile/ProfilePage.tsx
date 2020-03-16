@@ -10,7 +10,7 @@ class ProfilePage extends Component<any> {
     render() {
         const profileContent = this.props.authorizedUser.role === Role[CUSTOMER] ? <CustomerProfile user={this.props.authorizedUser}/> : <h1>User Profile</h1>;
         return (
-            <Layout activeRoute={this.props.history}>
+            <Layout history={this.props.history}>
                 {profileContent}
             </Layout>
         );

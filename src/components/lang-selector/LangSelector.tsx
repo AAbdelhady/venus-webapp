@@ -7,7 +7,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import {RouteComponentProps} from 'react-router';
 
 interface Props {
-    activeRoute: RouteComponentProps;
+    history: RouteComponentProps;
 }
 
 const LangSelector = (props: Props) => {
@@ -16,7 +16,7 @@ const LangSelector = (props: Props) => {
 
     const changeLang = (lang) => {
         if (lang !== currentLang) {
-            dispatch(actions.changeLanguage(lang, props.activeRoute));
+            dispatch(actions.changeLanguage(lang, props.history));
         }
     };
 
