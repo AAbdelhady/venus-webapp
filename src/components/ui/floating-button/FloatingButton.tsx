@@ -16,7 +16,7 @@ const style: React.CSSProperties = {
 
 const FloatingButton = (props: Props) => {
     return (
-        <Fab color="primary" onClick={props.onClick} className={classes.FloatingBottomRight} style={style}>
+        <Fab color="secondary" onClick={props.onClick} className={classes.FloatingBottomRight} style={style}>
             {props.children}
         </Fab>
     );

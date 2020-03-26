@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import {fetchMyBooking} from '../../../api/booking.api';
+import {fetchMyBookings} from '../../../api/booking.api';
 import {Booking} from '../../../models/booking.model';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -30,7 +30,7 @@ const bookingList = (bookings: Booking[]) => {
 const CustomerProfile = (props) => {
     const [bookings, setBookings] = useState([]);
     useEffect(() => {
-        fetchMyBooking().then(response => setBookings(response.data))
+        fetchMyBookings().then(response => setBookings(response.data))
     }, []);
     return (
         <div>

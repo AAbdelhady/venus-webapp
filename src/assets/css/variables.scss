@@ -1,6 +1,10 @@
+$primary-dark: #000624;
 $primary: #19224D;
-$dark-primary: #161D41;
+$primary-light: #7B83A7;
+
+$secondary-dark: #6d1d33;
 $secondary: #A32952;
+$secondary-light: #D1A9BD;
 
 $primary-text: #F4F5FA;
 
@@ -14,4 +18,7 @@ $xl-breakpoint: 1920px;
 :export {
   primaryMain: $primary;
   secondaryMain: $secondary;
+  secondaryLight: $secondary-light;
+  secondaryDark: $secondary-dark;
+  primaryText: $primary-text
 }

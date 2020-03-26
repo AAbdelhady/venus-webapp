@@ -15,6 +15,7 @@ interface Props {
     children?;
     onClose?;
     zIndex?;
+    containerClassName?;
 }
 
 const Transition: React.ComponentType<TransitionProps> = React.forwardRef((props, ref) => {
@@ -33,7 +34,7 @@ const Dialog = (props: Props) => {
     return (
         <MuiDialog open={props.open} onClose={props.onClose} keepMounted TransitionComponent={Transition} fullScreen={fullScreen} maxWidth={false} style={style}>
             {dialogTitle(props.title)}
-            <DialogContent>
+            <DialogContent className={props.containerClassName}>
                 {props.open && props.children}
             </DialogContent>
         </MuiDialog>

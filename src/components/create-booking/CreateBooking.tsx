@@ -67,7 +67,7 @@ const CreateBooking = (props: Props) => {
                     />
                 </Col>
                 <Col xs={12} className="mt-3">
-                    <DatePicker name="date" label={t('BOOKING_DATE')} value={formik.values.date} onChange={updateDate} disablePast/>
+                    <DatePicker label={t('BOOKING_DATE')} value={formik.values.date} onChange={updateDate} disablePast/>
                 </Col>
                 <Col xs={12} className="mt-3">
                     <TextField name="message" label={t('NOTES')} value={formik.values.message} onChange={formik.handleChange} className="w-100"/>

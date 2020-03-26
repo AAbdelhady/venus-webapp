@@ -4,7 +4,8 @@ import {supportedLangs} from '../../i18n/lang';
 import * as actions from '../../store/actions';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import {RouteComponentProps} from 'react-router';
-import classes from "./LangSelector.module.scss";
+import {Button} from '@material-ui/core';
+import variables from '../../assets/css/variables.scss';
 
 interface Props {
     history: RouteComponentProps;
@@ -20,16 +21,16 @@ const LangSelector = (props: Props) => {
         }
     };
 
-    const className = (lang) => lang === currentLang ? classes.Active : classes.Inactive;
+    const textColor = (lang) => lang === currentLang ? variables.secondaryMain : variables.primaryText;
 
     const buttons = supportedLangs.map(lang => (
-        <div key={lang} onClick={() => changeLang(lang)} className={className(lang)}>
+        <Button key={lang} onClick={() => changeLang(lang)} style={{color: textColor(lang)}}>
             {lang.toUpperCase()}
-        </div>
+        </Button>
     ));
 
     return (
-        <ButtonGroup variant="text" color="secondary">
+        <ButtonGroup variant="text">
             {buttons}
         </ButtonGroup>
     );
