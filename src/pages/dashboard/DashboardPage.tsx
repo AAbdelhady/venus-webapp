@@ -81,7 +81,7 @@ class DashboardPage extends Component<any, State> {
 
     render() {
         return (
-            <Layout history={this.props.history}>
+            <Layout>
                 <Container>
                     <Tabs labels={labels} currentIndex={this.state.currentTabIndex} onChange={this.changeTab}/>
                     <div className="mt-5">

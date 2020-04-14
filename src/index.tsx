@@ -12,6 +12,7 @@ import authReducer from './store/reducers/auth';
 import uiReducer from './store/reducers/ui';
 import artistReducer from './store/reducers/artist';
 import i18nReducer from './store/reducers/i18n';
+import notificationReducer from './store/reducers/notification';
 import {popStateFromLocalStorage, pushStateToLocalStorage} from './utils/localStorage';
 
 // @ts-ignore
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     auth: authReducer,
     ui: uiReducer,
     artist: artistReducer,
-    i18n: i18nReducer
+    i18n: i18nReducer,
+    notification: notificationReducer
 });
 
 const persistedState = popStateFromLocalStorage();

@@ -1,20 +1,14 @@
 import {saveToLocalStorage} from './localStorage';
 import {localStorageKeys, socialLoginLinkPrefix} from './constants';
 
-export const updateObject = (oldObject, updatedProperties) => {
-    return {
-        ...oldObject,
-        ...updatedProperties
-    };
-};
+export const updateObject = (oldObject, updatedProperties) => ({
+    ...oldObject,
+    ...updatedProperties
+});
 
-export const googleLogin = (event: any) => {
-    login(event, 'google');
-};
+export const googleLogin = (event: any) => login(event, 'google');
 
-export const facebookLogin = (event: any) => {
-    login(event, 'facebook');
-};
+export const facebookLogin = (event: any) => login(event, 'facebook');
 
 const login = (event: any, suffix: string) => {
     event.preventDefault();
@@ -22,15 +16,8 @@ const login = (event: any, suffix: string) => {
     window.location.href = socialLoginLinkPrefix + suffix;
 };
 
-export const join = (...strings: string[]): string => {
-    return strings.join(' ');
-};
+export const formHasErrors = (formik: any) => !!Object.keys(formik.errors).length || !formik.dirty;
 
-export const formHasErrors = (formik: any) => {
-    return !!Object.keys(formik.errors).length || !formik.dirty;
-};
+export const random = () => Math.floor(Math.random() * 1000000);
 
-export const random = () => {
-    return Math.floor(Math.random() * 1000000);
-};
 

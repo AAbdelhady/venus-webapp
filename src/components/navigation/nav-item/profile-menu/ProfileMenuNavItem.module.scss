@@ -1,0 +1,15 @@
+@import '../../../../assets/css/variables';
+
+.ProfileMenu {
+  & li {
+    padding: 6px 3rem;
+
+    & a {
+      color: $primary;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

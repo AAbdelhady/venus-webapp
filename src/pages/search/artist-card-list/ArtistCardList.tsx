@@ -20,13 +20,12 @@ const endMessage = <h3 style={{textAlign: 'center'}}>Yay! You have seen it all</
 const pullDownToRefreshContent = <h3 style={{textAlign: 'center'}}>&#8595; Pull down to refresh</h3>;
 const releaseToRefreshContent = <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>;
 
-const artistCardList = (artistList) => {
-    return artistList.map(artist => (
-        <Col key={artist.id} sm={4}>
-            <ArtistCard key={artist.id} artist={artist}/>
-        </Col>
-    ));
-};
+const artistCardList = (artistList) => artistList.map(artist => (
+    <Col key={artist.id} sm={4}>
+        <ArtistCard key={artist.id} artist={artist}/>
+    </Col>
+));
+
 
 const artistCardSkeletons = (count) => {
     const artistCardSkeletonList: any[] = [];

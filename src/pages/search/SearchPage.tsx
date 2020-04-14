@@ -83,7 +83,7 @@ class SearchPage extends Component<Props> {
     render() {
         const artists = this.props.artistList ? this.props.artistList : [];
         return (
-            <Layout history={this.props.history}>
+            <Layout>
                 <div className={classes.Container}>
                     <div className={classes.CategorySelectContainer}>
                         <CategorySelect categories={this.state.categories} selected={this.state.currentCategory} onChange={this.onCategoryChanged}/>
@@ -96,18 +96,15 @@ class SearchPage extends Component<Props> {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        artistList: state.artist.artistList,
-        currentPageNumber: state.artist.currentPageNumber,
-        totalElements: state.artist.totalElements,
-        isFetchingPage: state.artist.loading
-    };
-};
-const mapDispatchToProps = dispatch => {
-    return {
-        searchArtists: (pageable, category) => dispatch(actions.searchArtists(pageable, category))
-    };
-};
+const mapStateToProps = state => ({
+    artistList: state.artist.artistList,
+    currentPageNumber: state.artist.currentPageNumber,
+    totalElements: state.artist.totalElements,
+    isFetchingPage: state.artist.loading
+});
+
+const mapDispatchToProps = dispatch => ({
+    searchArtists: (pageable, category) => dispatch(actions.searchArtists(pageable, category))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

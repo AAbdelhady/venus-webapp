@@ -18,7 +18,7 @@ interface Props {
 class Register extends Component<Props> {
 
     state = {
-      role: Role.UNSPECIFIED
+        role: Role.UNSPECIFIED
     };
 
     pickRole = (role: Role) => {
@@ -29,7 +29,7 @@ class Register extends Component<Props> {
     };
 
     backToPickRole = () => {
-      this.setState({role: Role.UNSPECIFIED});
+        this.setState({role: Role.UNSPECIFIED});
     };
 
     render() {
@@ -51,11 +51,9 @@ class Register extends Component<Props> {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        registerArtist: (artistRequest: ArtistRequest) => dispatch(actions.registerArtist(artistRequest)),
-        registerCustomer: () => dispatch(actions.registerCustomer())
-    };
-};
+const mapDispatchToProps = dispatch => ({
+    registerArtist: (artistRequest: ArtistRequest) => dispatch(actions.registerArtist(artistRequest)),
+    registerCustomer: () => dispatch(actions.registerCustomer())
+});
 
 export default connect(null, mapDispatchToProps)(Register);

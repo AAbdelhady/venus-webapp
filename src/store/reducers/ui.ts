@@ -9,13 +9,10 @@ const initialState: State = {
     showLoading: false
 };
 
-const showLoadingOverlay = (state: State) => {
-    return updateObject(state, {showLoading: true});
-};
+const showLoadingOverlay = (state: State) => updateObject(state, {showLoading: true});
 
-const hideLoadingOverlay = (state: State) => {
-    return updateObject(state, {showLoading: false});
-};
+const hideLoadingOverlay = (state: State) => updateObject(state, {showLoading: false});
+
 
 const reducer = (state: State = initialState, action) => {
     switch (action.type) {

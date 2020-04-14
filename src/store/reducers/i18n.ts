@@ -12,12 +12,10 @@ const initialState: State = {
     langPrefix: ''
 };
 
-const setLanguage = (state: State, action) => {
-    return updateObject(state, {
-        lang: action.lang,
-        langPrefix: langPrefix(action.lang)
-    });
-};
+const setLanguage = (state: State, action) => updateObject(state, {
+    lang: action.lang,
+    langPrefix: langPrefix(action.lang)
+});
 
 const reducer = (state: State = initialState, action) => {
     switch (action.type) {

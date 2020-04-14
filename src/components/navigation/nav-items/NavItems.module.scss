@@ -1,24 +1,31 @@
+@import '../../../assets/css/variables';
+
 .NavigationItems {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-flow: column-reverse;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-flow: column-reverse;
+  align-items: center;
+  height: 100%;
+
+  & .NavigationItem {
     align-items: center;
+    border-bottom: 4px solid transparent;
+    color: white;
+    cursor: pointer;
+    display: flex;
     height: 100%;
+    padding: 10px;
+  }
+
+  & .NavigationItem:hover {
+    border-bottom: 4px solid $secondary;
+  }
 }
 
-@media (min-width: 500px) {
-    .NavigationItems {
-        flex-flow: row;
-    }
-}
-
-.NavItemSkeletonContainer {
-  padding: 5px;
-
-  & span {
-    background: blue;
-    width: 100px;
+@media (min-width: $sm-breakpoint) {
+  .NavigationItems {
+    flex-flow: row;
   }
 }

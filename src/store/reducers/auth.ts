@@ -14,28 +14,22 @@ const initialState: State = {
     error: null
 };
 
-const authStart = (state: State, action) => {
-    return updateObject(state, {
-        loading: true,
-        error: null
-    });
-};
+const authStart = (state: State, action) => updateObject(state, {
+    loading: true,
+    error: null
+});
 
-const authSuccess = (state: State, action) => {
-    return updateObject(state, {
-        user: action.user,
-        loading: false,
-        error: null
-    });
-};
+const authSuccess = (state: State, action) => updateObject(state, {
+    user: action.user,
+    loading: false,
+    error: null
+});
 
-const authFail = (state: State, action) => {
-    return updateObject(state, {
-        user: null,
-        loading: false,
-        error: action.error
-    });
-};
+const authFail = (state: State, action) => updateObject(state, {
+    user: null,
+    loading: false,
+    error: action.error
+});
 
 const reducer = (state: State = initialState, action) => {
     switch (action.type) {

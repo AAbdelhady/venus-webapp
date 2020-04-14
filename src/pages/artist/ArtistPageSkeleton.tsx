@@ -17,17 +17,15 @@ const gallerySkeleton = () => {
     return <Row className={classes.GalleryContainer}>{skeletons}</Row>;
 };
 
-const ArtistPageSkeleton = () => {
-    return (
-        <>
-            <Skeleton variant="rect" width="100%" height={400}/>
-            <div className={classes.NameContainer}>
-                <Skeleton variant="rect" width={150} height={30} style={{display: 'inline-block'}}/>
-                <Skeleton variant="rect" width={150} height={30} style={{display: 'inline-block', marginLeft: '10px'}}/>
-            </div>
-            {gallerySkeleton()}
-        </>
-    );
-};
+const ArtistPageSkeleton = () => (
+    <>
+        <Skeleton variant="rect" width="100%" height={400}/>
+        <div className={classes.NameContainer}>
+            <Skeleton variant="rect" width={150} height={30} style={{display: 'inline-block'}}/>
+            <Skeleton variant="rect" width={150} height={30} style={{display: 'inline-block', marginLeft: '10px'}}/>
+        </div>
+        {gallerySkeleton()}
+    </>
+);
 
 export default ArtistPageSkeleton;

@@ -14,12 +14,10 @@ const style: React.CSSProperties = {
     zIndex: ZIndex.FAB
 };
 
-const FloatingButton = (props: Props) => {
-    return (
-        <Fab color="secondary" onClick={props.onClick} className={classes.FloatingBottomRight} style={style}>
-            {props.children}
-        </Fab>
-    );
-};
+const FloatingButton = (props: Props) => (
+    <Fab color="secondary" onClick={props.onClick} className={classes.FloatingBottomRight} style={style}>
+        {props.children}
+    </Fab>
+);
 
 export default FloatingButton;

@@ -8,12 +8,12 @@ import classes from './ArtistSpecialityList.module.scss';
 import {Speciality} from '../../../models/speciality.model';
 
 interface Props {
-    specialities: Speciality[];
+    specialities: Speciality[] | null | undefined;
     selectSpeciality(s: Speciality);
 }
 
 const ArtistSpecialityList = (props: Props) => {
-    const specialityList = () => props.specialities.map(s =>
+    const specialityList = () => props.specialities && props.specialities.map(s =>
         <ListItem button key={s.id} onClick={() => props.selectSpeciality(s)}>
             <ListItemIcon>
                 <InboxIcon/>

@@ -18,3 +18,8 @@ export const ARTIST = {
 export const I18N = {
     CHANGE_LANG: 'CHANGE_LANG'
 };
+
+export const NOTIFICATION = {
+    FETCH_SUCCESS: 'FETCH_SUCCESS',
+    FETCH_FAIL: 'FETCH_FAIL'
+};

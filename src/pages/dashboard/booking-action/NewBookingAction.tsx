@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import {Booking} from '../../../models/booking.model';
 import TimePicker from '../../../components/ui/time-picker/TimePicker';
 import Button from '@material-ui/core/Button';
-import {addItemIfNotExist, removeItem} from '../../../utils/array';
+import {addItemIfNotExist} from '../../../utils/array';
 import classes from './BookingAction.module.scss';
 import {offerAppointmentTimes} from '../../../api/booking.api';
 
@@ -36,9 +36,9 @@ const NewBookingAction = (props: Props) => {
     const [selectedAppointmentTime, setSelectedAppointmentTime] = useState(initialTimePickerValue());
     const [appointmentTimes, setAppointmentTimes] = useState<string[]>([]);
     const addAppointmentTime = () => setAppointmentTimes(addItemIfNotExist(appointmentTimes, selectedAppointmentTime.toLocaleTimeString()));
-    const removeAppointmentTime = (item) => setAppointmentTimes(removeItem(appointmentTimes, i => i === item));
+    const removeAppointmentTime = (item) => setAppointmentTimes(appointmentTimes.filter(i => i !== item));
     const submit = () => submitOfferedTimes(props.booking, appointmentTimes, props.onActionSubmitted);
-    return props.booking ? (
+    return props.booking && (
         <div className={classes.NewBookingActionContainer}>
             <Row>
                 <Col sm={6}>
@@ -71,7 +71,7 @@ const NewBookingAction = (props: Props) => {
                 </Col>
             </Row>
         </div>
-    ) : null;
+    );
 };
 
 export default NewBookingAction;

@@ -44,9 +44,7 @@ class RegisterArtist extends Component<Props> {
     }
 
     handleNext = () => {
-        this.setState((prevState: State) => {
-            return {activeStep: prevState.activeStep + 1};
-        });
+        this.setState((prevState: State) => ({activeStep: prevState.activeStep + 1}));
     };
 
     setArtistCategory = (category: string) => {
@@ -65,10 +63,7 @@ class RegisterArtist extends Component<Props> {
         this.handleNext();
     };
 
-    submit = () => {
-        console.log(this.state.artist);
-        this.props.register(this.state.artist);
-    };
+    submit = () => this.props.register(this.state.artist);
 
     get steps() {
         return [

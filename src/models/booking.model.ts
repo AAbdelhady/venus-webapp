@@ -23,17 +23,15 @@ export interface Offering {
     time: Date;
 }
 
-export function bookingToEvent(booking: Booking, eventGroupId: string): CalendarEvent {
-    return {
-        id: booking.id,
-        groupId: eventGroupId,
-        start: booking.bookingDate,
-        title: `${booking.customer.firstName} ${booking.customer.lastName} (${booking.speciality?.name})`,
-        backgroundColor: bookingEventBgColor[booking.status],
-        textColor: variables.primaryText,
-        extendedProps: booking
-    };
-}
+export const bookingToEvent = (booking: Booking, eventGroupId: string): CalendarEvent => ({
+    id: booking.id,
+    groupId: eventGroupId,
+    start: booking.bookingDate,
+    title: `${booking.customer.firstName} ${booking.customer.lastName} (${booking.speciality?.name})`,
+    backgroundColor: bookingEventBgColor[booking.status],
+    textColor: variables.primaryText,
+    extendedProps: booking
+});
 
 const bookingEventBgColor: { [key in BookingStatus]: string } = {
     [BookingStatus.NEW]: variables.secondaryDark,

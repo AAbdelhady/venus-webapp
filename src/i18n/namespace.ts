@@ -4,8 +4,6 @@ const ns = {
     booking: "booking"
 };
 
-export const namespaces = () => {
-    return Object.values(ns);
-};
+export const namespaces = () => Object.values(ns);
 
 export default ns;

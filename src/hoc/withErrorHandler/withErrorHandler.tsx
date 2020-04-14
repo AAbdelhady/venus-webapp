@@ -3,72 +3,69 @@ import Dialog from '../dialog/Dialog';
 import {ZIndex} from '../../utils/enums';
 import classes from './withErrorHandler.module.scss';
 
-const withErrorHandler: any = (WrappedComponent, axios) => {
+const withErrorHandler: any = (WrappedComponent, axios) => class extends Component {
 
-    return class extends Component {
+    reqInterceptor;
+    resInterceptor;
+    state: any = {
+        error: null
+    };
 
-        reqInterceptor;
-        resInterceptor;
-        state: any = {
-            error: null
-        };
+    constructor(props) {
+        super(props);
+        this.initInterceptors();
+    }
 
-        constructor(props) {
-            super(props);
-            this.initInterceptors();
+    componentWillUnmount() {
+        this.ejectInterceptors();
+    }
+
+    errorConfirmedHandler = () => {
+        this.setState({error: null});
+    };
+
+    get showError(): boolean {
+        return !!(this.state.error && (this.state.error?.response?.status !== 401));
+    }
+
+    get errorMessage() {
+        if (this.state.error?.response) {
+            const errorResponse = this.state.error.response;
+            const meta = `[status: ${errorResponse.status} - code: ${errorResponse.data.code?.value}]`;
+            const message = errorResponse.data.message || errorResponse.message;
+            return <span><strong>{meta}</strong>&nbsp;{message}</span>
         }
-
-        componentWillUnmount() {
-            this.ejectInterceptors();
+        if (this.state.error?.message) {
+            return <strong>{this.state.error?.message}</strong>;
         }
+        return <strong>Something went wrong :(</strong>
+    }
 
-        errorConfirmedHandler = () => {
+    private initInterceptors() {
+        this.reqInterceptor = axios.interceptors.request.use(req => {
             this.setState({error: null});
-        };
+            return req;
+        });
+        this.resInterceptor = axios.interceptors.response.use(res => res, error => {
+            this.setState({error: error});
+            throw error;
+        });
+    }
 
-        get showError(): boolean {
-            return !!(this.state.error && (this.state.error?.response?.status !== 401));
-        }
+    private ejectInterceptors() {
+        axios.interceptors.request.eject(this.reqInterceptor);
+        axios.interceptors.response.eject(this.resInterceptor);
+    }
 
-        get errorMessage() {
-            if (this.state.error?.response) {
-                const errorResponse = this.state.error.response;
-                const meta = `[status: ${errorResponse.status} - code: ${errorResponse.data.code?.value}]`;
-                const message = errorResponse.data.message || errorResponse.message;
-                return <span><strong>{meta}</strong>&nbsp;{message}</span>
-            }
-            if (this.state.error?.message) {
-                return <strong>{this.state.error?.message}</strong>;
-            }
-            return <strong>Something went wrong :(</strong>
-        }
-
-        private initInterceptors() {
-            this.reqInterceptor = axios.interceptors.request.use(req => {
-                this.setState({error: null});
-                return req;
-            });
-            this.resInterceptor = axios.interceptors.response.use(res => res, error => {
-                this.setState({error: error});
-                throw error;
-            });
-        }
-
-        private ejectInterceptors() {
-            axios.interceptors.request.eject(this.reqInterceptor);
-            axios.interceptors.response.eject(this.resInterceptor);
-        }
-
-        render() {
-            return (
-                <>
-                    <Dialog open={this.showError} onClose={this.errorConfirmedHandler} zIndex={ZIndex.errorHandlerDialog}>
-                        <p className={classes.Message}>{this.errorMessage}</p>
-                    </Dialog>
-                    <WrappedComponent {...this.props} />
-                </>
-            );
-        }
+    render() {
+        return (
+            <>
+                <Dialog open={this.showError} onClose={this.errorConfirmedHandler} zIndex={ZIndex.errorHandlerDialog}>
+                    <p className={classes.Message}>{this.errorMessage}</p>
+                </Dialog>
+                <WrappedComponent {...this.props} />
+            </>
+        );
     }
 };
 

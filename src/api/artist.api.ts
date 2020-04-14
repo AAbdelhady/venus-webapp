@@ -4,18 +4,14 @@ import {pageableQueryParams} from './api.util';
 
 const root = 'artist';
 
-export const registerAsArtist = (artistRequest: ArtistRequest) => {
-    const url = `${root}`;
-    return axios.post(url, artistRequest);
-};
+export const registerAsArtist = (artistRequest: ArtistRequest) => axios.post(root, artistRequest);
 
 export const fetchArtists = (pageable: Pageable, category?: string) => {
-    const url = `${root}`;
     let queryParams: any = pageableQueryParams(pageable);
     if (category) {
         queryParams = {...queryParams, category: category};
     }
-    return axios.get(url, {params: queryParams});
+    return axios.get(root, {params: queryParams});
 };
 
 export const fetchArtistById = (id: number) => {

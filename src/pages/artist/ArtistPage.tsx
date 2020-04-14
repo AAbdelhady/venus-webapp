@@ -19,7 +19,7 @@ import Snackbar from '../../components/ui/snackbar/Snackbar';
 import {Speciality} from '../../models/speciality.model';
 
 interface State {
-    artist: Artist;
+    artist: Artist | null;
     loading: boolean;
     error: any;
     showBookingDialog: boolean;
@@ -49,7 +49,7 @@ const galleryTemp = () => {
 class ArtistPage extends Component<any> {
 
     state: State = {
-        artist: new Artist(),
+        artist: null,
         loading: true,
         error: null,
         showBookingDialog: false,
@@ -92,6 +92,9 @@ class ArtistPage extends Component<any> {
     };
 
     submitCreateBooking = (createBookingForm) => {
+        if (!this.state.artist) {
+            return
+        }
         const bookingRequest: BookingRequest = {
             specialityId: createBookingForm.specialityId,
             bookingDate: createBookingForm.date,
@@ -127,17 +130,15 @@ class ArtistPage extends Component<any> {
             </>
         );
         return (
-            <Layout history={this.props.history}>
+            <Layout>
                 {this.state.loading ? <ArtistPageSkeleton/> : pageContent}
             </Layout>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        authorizedUser: state.auth.user
-    };
-};
+const mapStateToProps = state => ({
+    authorizedUser: state.auth.user
+});
 
 export default connect(mapStateToProps)(ArtistPage);

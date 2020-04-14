@@ -24,10 +24,6 @@ export const popFromLocalStorage = (key: string) => {
     return value;
 };
 
-export const pushStateToLocalStorage = (state) => {
-    saveToLocalStorage(localStorageKeys.state, state);
-};
+export const pushStateToLocalStorage = (state) => saveToLocalStorage(localStorageKeys.state, state);
 
-export const popStateFromLocalStorage = () => {
-    return popFromLocalStorage(localStorageKeys.state);
-};
+export const popStateFromLocalStorage = () => popFromLocalStorage(localStorageKeys.state);

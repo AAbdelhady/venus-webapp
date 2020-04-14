@@ -5,14 +5,9 @@ import logo from '../../../assets/small-logo.png';
 import NavItems from '../nav-items/NavItems';
 import DrawerToggle from '../side-drawer/drawer-toggle/DrawerToggle';
 import LangSelector from '../../lang-selector/LangSelector';
-import {User} from '../../../models/user.model';
-import {RouteComponentProps} from 'react-router';
 import {NavLink} from 'react-router-dom';
 
 interface Props {
-    authorizedUser: User;
-    authLoading: boolean;
-    history: RouteComponentProps;
     drawerToggleClicked();
 }
 
@@ -24,9 +19,9 @@ const Toolbar = (props: Props) => {
             <NavLink to={langPrefix} exact className={classes.Logo}>
                 <img src={logo} alt="logo"/>
             </NavLink>
-            <LangSelector history={props.history}/>
+            <LangSelector/>
             <nav className={classes.DesktopOnly}>
-                <NavItems authorizedUser={props.authorizedUser} authLoading={props.authLoading} langPrefix={langPrefix}/>
+                <NavItems/>
             </nav>
         </header>
     );

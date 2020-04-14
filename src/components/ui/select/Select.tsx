@@ -19,7 +19,7 @@ interface Props {
 const Select = (props: Props) => {
     const options = props.options ? props.options : [];
     const selectId = `select-${random()}`;
-    const label = props.label ? <InputLabel htmlFor={selectId}>{props.label}</InputLabel> : null;
+    const label = props.label && <InputLabel htmlFor={selectId}>{props.label}</InputLabel>;
     const currentValue = props.value ? props.value : '';
     return (
         <FormControl style={props.style} className={classes.Container}>

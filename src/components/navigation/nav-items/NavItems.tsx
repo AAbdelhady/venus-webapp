@@ -1,39 +1,31 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {withRouter} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import classes from './NavItems.module.scss';
-import NavItem from './nav-item/NavItem';
 import {Role, User} from "../../../models/user.model";
-import LoggedInAuthNavItem from './logged-in-auth-nav-item/LoggedInAuthNavItem';
-import LoggedOutAuthNavItem from './logged-out-auth-nav-item/LoggedOutAuthNavItem';
-import NavItemsSkeleton from './NavItemsSkeleton';
+import SkeletonNavItem from '../nav-item/skeleton/SkeletonNavItem';
+import RouteNavItem from '../nav-item/route/RouteNavItem';
+import NotificationsNavItem from '../nav-item/notification/NotificationsNavItem';
+import ProfileMenuNavItem from '../nav-item/profile-menu/ProfileMenuNavItem';
+import LoginNavItem from '../nav-item/login/LoginNavItem';
 
-const authNav = (authorizedUser: User) => {
-    return authorizedUser ? <LoggedInAuthNavItem key="loggedIn" authorizedUser={authorizedUser}/> : <LoggedOutAuthNavItem key="loggedOut"/>;
-};
+const skeletons = [<SkeletonNavItem/>, <SkeletonNavItem/>, <SkeletonNavItem/>];
 
-const roleSpecificNavs = (props) => {
-    return (props.authorizedUser?.role === Role.ARTIST) ?
-        [
-            prepareNavItem("/dashboard", "Dashboard", props)
-        ] :
-        [
-            prepareNavItem("/search", "Search", props)
-        ];
-};
+const authSpecificNavs = (authorizedUser: User) => authorizedUser
+    ? [<NotificationsNavItem/>, <ProfileMenuNavItem user={authorizedUser}/>]
+    : [<LoginNavItem/>];
 
-const prepareNavItem = (path: string, title: string, props) => {
-    const currentPath = props.location.pathname;
-    if (currentPath && currentPath === (props.langPrefix + path)) {
-        return null;
-    }
-    return <NavItem key={path} link={props.langPrefix + path}>{title}</NavItem>;
-};
+const roleSpecificNavs = (authorizedUser: User) => (authorizedUser?.role === Role.ARTIST)
+    ? [<RouteNavItem link="/dashboard">Dashboard</RouteNavItem>]
+    : [<RouteNavItem link="/search">Search</RouteNavItem>];
 
-const NavItems = (props) => {
-    const content = props.authLoading ? <NavItemsSkeleton/> : roleSpecificNavs(props).concat(authNav(props.authorizedUser));
+const NavItems = () => {
+    const authorizedUser = useSelector(state => state.auth.user);
+    const authLoading = useSelector(state => state.auth.loading);
+    const items: ReactNode[] = authLoading ? skeletons : [...roleSpecificNavs(authorizedUser), ...authSpecificNavs(authorizedUser)];
     return (
         <ul className={classes.NavigationItems}>
-            {content}
+            {items.map((item, idx) => <li key={`nav-item-${idx}`} className={classes.NavigationItem}>{item}</li>)}
         </ul>
     );
 };

@@ -1,12 +1,10 @@
 import {Pageable, Sort} from '../models/pageable.model';
 
-export const pageableQueryParams = (pageable: Pageable): PageableParams => {
-    return {
-        size: pageable.pageSize,
-        page: pageable.pageNumber,
-        sort: sortToString(pageable.sort)
-    }
-};
+export const pageableQueryParams = (pageable: Pageable): PageableParams => ({
+    size: pageable.pageSize,
+    page: pageable.pageNumber,
+    sort: sortToString(pageable.sort)
+});
 
 const sortToString = (sort: Sort | null | undefined) => {
     if (!sort) {

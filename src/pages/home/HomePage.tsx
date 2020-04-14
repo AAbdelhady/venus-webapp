@@ -30,7 +30,7 @@ class HomePage extends Component<Props> {
             ? <h3>Authenticated user is {this.props.authorizedUser.firstName} {this.props.authorizedUser.lastName} <a href={logoutLink}>Logout</a></h3>
             : loginLinks;
         return (
-            <Layout history={this.props.history}>
+            <Layout>
                 <div className={classes.App}>
                     <header className={classes.AppHeader}>
                         {authenticatedPersonSection}
@@ -50,10 +50,8 @@ class HomePage extends Component<Props> {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        authenticatedUser: state.auth.user
-    }
-};
+const mapStateToProps = state => ({
+    authenticatedUser: state.auth.user
+});
 
 export default connect(mapStateToProps)(HomePage);

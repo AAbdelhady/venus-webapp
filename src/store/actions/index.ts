@@ -20,3 +20,7 @@ export {
     changeLanguage,
     setLanguageFromRoute
 } from './i18n';
+
+export {
+    fetchMyNotifications
+} from './notification'

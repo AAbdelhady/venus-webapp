@@ -1,0 +1,10 @@
+@import '../../../../assets/css/variables';
+
+.SkeletonNavItem {
+  padding: 5px;
+
+  & span {
+    background: $primary;
+    width: 100px;
+  }
+}

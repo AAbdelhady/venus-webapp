@@ -1,25 +1,19 @@
 import {fetchAuthenticatedUser} from '../../api/user.api';
 import {AUTH as authActionTypes} from './actionTypes';
 
-export const authStart = () => {
-    return {
-        type: authActionTypes.START
-    };
-};
+const authStart = () => ({
+    type: authActionTypes.START
+});
 
-export const authSuccess = (user) => {
-    return {
-        type: authActionTypes.SUCCESS,
-        user: user
-    };
-};
+const authSuccess = (user) => ({
+    type: authActionTypes.SUCCESS,
+    user: user
+});
 
-export const authFail = (error) => {
-    return {
-        type: authActionTypes.FAIL,
-        error: error
-    };
-};
+const authFail = (error) => ({
+    type: authActionTypes.FAIL,
+    error: error
+});
 
 export const auth = () => {
     return dispatch => {

@@ -24,12 +24,10 @@ const initialState: State = {
     loading: false
 };
 
-const searchStart = (state: State) => {
-    return updateObject(state, {
-        loading: true,
-        error: null
-    });
-};
+const searchStart = (state: State) => updateObject(state, {
+    loading: true,
+    error: null
+});
 
 const searchSuccess = (state: State, action: SearchSuccessAction) => {
     const initialList: Array<Artist> = action.pageNumber !== 0 ? state.artistList : [];
@@ -43,14 +41,12 @@ const searchSuccess = (state: State, action: SearchSuccessAction) => {
     });
 };
 
-const searchFail = (state: State, action) => {
-    return updateObject(state, {
-        artistPage: state.artistList,
-        totalElements: 0,
-        loading: false,
-        error: action.error
-    });
-};
+const searchFail = (state: State, action) => updateObject(state, {
+    artistList: state.artistList,
+    totalElements: 0,
+    loading: false,
+    error: action.error
+});
 
 const reducer = (state: State = initialState, action) => {
     switch (action.type) {

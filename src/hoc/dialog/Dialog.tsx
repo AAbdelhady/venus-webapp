@@ -18,13 +18,11 @@ interface Props {
     containerClassName?;
 }
 
-const Transition: React.ComponentType<TransitionProps> = React.forwardRef((props, ref) => {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
+const Transition: React.ComponentType<TransitionProps> = React.forwardRef((props, ref) => (
+    <Slide direction="up" ref={ref} {...props} />
+));
 
-const dialogTitle = (title) => {
-    return title ? <DialogTitle className={classes.Title}>{title}</DialogTitle> : null;
-};
+const dialogTitle = (title) => title && <DialogTitle className={classes.Title}>{title}</DialogTitle>;
 
 const Dialog = (props: Props) => {
     const fullScreen = useMediaQuery(useTheme().breakpoints.down(Breakpoint.sm));

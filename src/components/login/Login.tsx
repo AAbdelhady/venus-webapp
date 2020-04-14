@@ -9,24 +9,22 @@ interface Props {
     cancel();
 }
 
-const Login = (props: Props) => {
-    return (
-        <div className={classes.Container}>
-            <div className={classes.ButtonContainer}>
-                <Button variant="contained" startIcon={<GoogleIcon/>} onClick={googleLogin}>
-                    Google
-                </Button>
-            </div>
-            <div className={classes.ButtonContainer}>
-                <Button variant="contained" startIcon={<FacebookIcon/>} onClick={facebookLogin}>
-                    Facebook
-                </Button>
-            </div>
-            <div className={classes.ButtonContainer}>
-                <Button href="" color="primary" onClick={props.cancel}>Back</Button>
-            </div>
+const Login = (props: Props) => (
+    <div className={classes.Container}>
+        <div className={classes.ButtonContainer}>
+            <Button variant="contained" startIcon={<GoogleIcon/>} onClick={googleLogin}>
+                Google
+            </Button>
         </div>
-    );
-};
+        <div className={classes.ButtonContainer}>
+            <Button variant="contained" startIcon={<FacebookIcon/>} onClick={facebookLogin}>
+                Facebook
+            </Button>
+        </div>
+        <div className={classes.ButtonContainer}>
+            <Button href="" color="primary" onClick={props.cancel}>Back</Button>
+        </div>
+    </div>
+);
 
 export default Login;

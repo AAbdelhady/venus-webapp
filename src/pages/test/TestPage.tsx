@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {googleLogin, join} from '../../utils/common';
+import classNames from 'classnames';
+import {googleLogin} from '../../utils/common';
 import {Link} from 'react-router-dom';
 import classes from './TestPage.module.scss';
 import Select from '@material-ui/core/Select';
@@ -13,12 +14,12 @@ class TestPage extends Component<any> {
     };
 
     render() {
-        const firstRowClasses = join(classes.ContainerBlue, classes.Container);
-        const secondRowClasses = join(classes.ContainerRed, classes.Container);
+        const firstRowClasses = classNames(classes.ContainerBlue, classes.Container);
+        const secondRowClasses = classNames(classes.ContainerRed, classes.Container);
         return (
             <>
                 <div className={firstRowClasses}>
-                    <Link to="/" >Home</Link>
+                    <Link to="/">Home</Link>
                 </div>
                 <div className={secondRowClasses}>
                     <a href="/" onClick={googleLogin}>Google</a>
@@ -33,16 +34,12 @@ class TestPage extends Component<any> {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        currentLang: state.i18n.lang
-    };
-};
+const mapStateToProps = state => ({
+    currentLang: state.i18n.lang
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        changeLanguage: (lang, history) => dispatch(actions.changeLanguage(lang, history))
-    };
-};
+const mapDispatchToProps = dispatch => ({
+    changeLanguage: (lang, history) => dispatch(actions.changeLanguage(lang, history))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestPage);
