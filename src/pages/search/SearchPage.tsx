@@ -81,7 +81,7 @@ class SearchPage extends Component<Props> {
     }
 
     render() {
-        const artists = this.props.artistList ? this.props.artistList : [];
+        const artists = this.props.artistList || [];
         return (
             <Layout>
                 <div className={classes.Container}>

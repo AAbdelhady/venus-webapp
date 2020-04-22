@@ -4,7 +4,6 @@ import resources from './resources';
 import {DEFAULT_LANG} from './lang';
 import ns, {namespaces} from './namespace';
 
-
 i18n.use(initReactI18next).init({
     resources,
     lng: DEFAULT_LANG,

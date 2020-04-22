@@ -1,52 +1,33 @@
-import React from 'react';
-import {withRouter} from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useLocation} from 'react-router-dom';
 import './App.scss';
-import {connect} from 'react-redux';
 import Routes from './routes';
 import Loading from './components/loading/Loading';
-import Register from './components/register/Register';
 import * as actions from './store/actions/index';
-import {Role} from './models/user.model';
 import {ThemeProvider} from '@material-ui/styles';
 import {theme} from './utils/theme';
-import './i18n/i18n';
+// import './i18n/i18n';
+import UserActionDialog from './components/user-action-dialog/UserActionDialog';
+import Snackbar from './components/ui/snackbar/Snackbar';
 
-interface State {
-    isLangInitFromRoute: boolean;
-}
+const App = () => {
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const lang = useSelector(state => state.i18n.lang);
+    useEffect(() => {
+        dispatch(actions.auth());
+        dispatch(actions.setLanguageFromRoute(location.pathname));
+    }, [dispatch, location]);
 
-class App extends React.Component<any> {
+    return lang && (
+        <ThemeProvider theme={theme}>
+            <Routes/>
+            <UserActionDialog/>
+            <Loading/>
+            <Snackbar/>
+        </ThemeProvider>
+    );
+};
 
-    state: State = {
-        isLangInitFromRoute: false
-    };
-
-    componentDidMount(): void {
-        this.props.fetchAuthorizedUser();
-        this.props.setLanguageFromRoute(this.props.history).then(() => {
-            this.setState({isLangInitFromRoute: true})
-        });
-    }
-
-    render() {
-        return this.state.isLangInitFromRoute && (
-            <ThemeProvider theme={theme}>
-                <Routes/>
-                <Loading show={this.props.showLoading}/>
-                <Register show={this.props.showRegister}/>
-            </ThemeProvider>
-        );
-    };
-}
-
-const mapStateToProps = state => ({
-    showLoading: state.ui.showLoading,
-    showRegister: state.auth.user?.role === Role.UNSPECIFIED
-});
-
-const mapDispatchToProps = dispatch => ({
-    fetchAuthorizedUser: () => dispatch(actions.auth()),
-    setLanguageFromRoute: (history) => dispatch(actions.setLanguageFromRoute(history))
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default App;

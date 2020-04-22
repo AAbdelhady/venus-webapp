@@ -1,26 +1,18 @@
-import React, {useState} from 'react';
-import {Observable} from 'rxjs';
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import MuiSnackbar from '@material-ui/core/Snackbar';
-import Alert, {Color} from '@material-ui/lab/Alert';
-
+import Alert from '@material-ui/lab/Alert';
+import * as actions from '../../../store/actions';
 
 const DEFAULT_TIMEOUT = 3000;
 
-interface Props {
-    observable: Observable<any>;
-    timeout?: number;
-    severity?: Color
-}
-
-const Snackbar = (props: Props) => {
-    const [show, setShow] = useState(false);
-    const timeout = props.timeout ? props.timeout : DEFAULT_TIMEOUT;
-    const severity = props.severity ? props.severity : 'info';
-    props.observable.subscribe(() => setShow(true));
+const Snackbar = () => {
+    const dispatch = useDispatch();
+    const {show, text, severity} = useSelector(state => state.snackbar);
     return (
-        <MuiSnackbar open={show} autoHideDuration={timeout} onClose={() => setShow(false)}>
+        <MuiSnackbar open={show} autoHideDuration={DEFAULT_TIMEOUT} onClose={() => dispatch(actions.hideSnackbar())}>
             <Alert severity={severity} variant="filled">
-                Booking has been created successfully!
+                {text}
             </Alert>
         </MuiSnackbar>
     )

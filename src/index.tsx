@@ -13,6 +13,8 @@ import uiReducer from './store/reducers/ui';
 import artistReducer from './store/reducers/artist';
 import i18nReducer from './store/reducers/i18n';
 import notificationReducer from './store/reducers/notification';
+import userActionDialog from './store/reducers/userActionDialog';
+import snackbar from './store/reducers/snackbar';
 import {popStateFromLocalStorage, pushStateToLocalStorage} from './utils/localStorage';
 
 // @ts-ignore
@@ -23,7 +25,9 @@ const rootReducer = combineReducers({
     ui: uiReducer,
     artist: artistReducer,
     i18n: i18nReducer,
-    notification: notificationReducer
+    notification: notificationReducer,
+    userActionDialog: userActionDialog,
+    snackbar: snackbar
 });
 
 const persistedState = popStateFromLocalStorage();

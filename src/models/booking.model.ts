@@ -20,6 +20,7 @@ export enum BookingStatus {
 }
 
 export interface Offering {
+    id: number;
     time: Date;
 }
 

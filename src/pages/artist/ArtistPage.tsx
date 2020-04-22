@@ -1,31 +1,17 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, {useCallback, useEffect, useState} from 'react';
+import {useDispatch} from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import AddIcon from '@material-ui/icons/Add';
 import Layout from '../../hoc/layout/Layout';
 import {fetchArtistById} from '../../api/artist.api';
-import {Artist} from '../../models/artist.model';
 import classes from './ArtistPage.module.scss';
 import ArtistPageSkeleton from './ArtistPageSkeleton';
 import FloatingButton from '../../components/ui/floating-button/FloatingButton';
 import ArtistSpecialityList from './artist-speciality-list/ArtistSpecialityList';
-import Dialog from '../../hoc/dialog/Dialog';
-import CreateBooking from '../../components/create-booking/CreateBooking';
-import Login from '../../components/login/Login';
-import {BookingRequest, createBooking} from '../../api/booking.api';
-import {Subject} from 'rxjs';
-import Snackbar from '../../components/ui/snackbar/Snackbar';
 import {Speciality} from '../../models/speciality.model';
-
-interface State {
-    artist: Artist | null;
-    loading: boolean;
-    error: any;
-    showBookingDialog: boolean;
-    showLoginDialog: boolean;
-    selectedSpeciality: Speciality | null;
-}
+import * as actions from '../../store/actions';
+import {Artist} from '../../models/artist.model';
 
 const galleryTemp = () => {
     const skeletons: any[] = [];
@@ -46,99 +32,43 @@ const galleryTemp = () => {
     return <Row className={classes.GalleryContainer}>{skeletons}</Row>;
 };
 
-class ArtistPage extends Component<any> {
+const ArtistPage = (props) => {
+    const dispatch = useDispatch();
+    const [artist, setArtist] = useState<Artist>();
+    const [loading, setLoading] = useState(true);
 
-    state: State = {
-        artist: null,
-        loading: true,
-        error: null,
-        showBookingDialog: false,
-        showLoginDialog: false,
-        selectedSpeciality: null
-    };
+    useEffect(() => {
+        fetchArtistById(props.match.params.id)
+            .then(response => setArtist(response.data))
+            .finally(() => setLoading(false));
+    }, [props.match.params.id]);
 
-    bookingCreatedNotificationSubject = new Subject();
-
-    componentDidMount(): void {
-        this.fetchArtist();
-    }
-
-    fetchArtist = () => {
-        fetchArtistById(this.props.match.params.id)
-            .then(response => this.setState({artist: response.data}))
-            .catch(error => {
-                this.setState({error: error});
-                throw error;
-            }).finally(() => this.setState({loading: false}));
-    };
-
-    handleStartBookingProcess = (selectedSpeciality?: Speciality) => {
-        if (this.props.authorizedUser) {
-            this.setState({
-                showBookingDialog: true,
-                selectedSpeciality: selectedSpeciality
-            });
-        } else {
-            this.setState({showLoginDialog: true});
+    const startBookingProcess = useCallback((selectedSpeciality?: Speciality) => {
+        if (artist) {
+            dispatch(actions.openCreateBookingDialog(artist, selectedSpeciality));
         }
-    };
+    }, [dispatch, artist]);
 
-    hideLoginDialog = () => {
-        this.setState({showLoginDialog: false});
-    };
-
-    hideBookingDialog = () => {
-        this.setState({showBookingDialog: false});
-    };
-
-    submitCreateBooking = (createBookingForm) => {
-        if (!this.state.artist) {
-            return
-        }
-        const bookingRequest: BookingRequest = {
-            specialityId: createBookingForm.specialityId,
-            bookingDate: createBookingForm.date,
-            message: createBookingForm.message,
-            artistId: this.state.artist.id,
-            customerId: this.props.authorizedUser.id
-        };
-        this.hideBookingDialog();
-        createBooking(bookingRequest).then(() => this.bookingCreatedNotificationSubject.next());
-    };
-
-    render() {
-        const pageContent = (
-            <>
-                <div className={classes.Header} style={{backgroundImage: `url(${this.state.artist?.profilePictureUrl})`}}/>
-                <div className={classes.Body}>
-                    <div className={classes.NameContainer}>
-                        <h1>{this.state.artist?.firstName} {this.state.artist?.lastName}</h1>
-                    </div>
-                    {galleryTemp()}
-                    <div className={classes.SpecialityListContainer}>
-                        <ArtistSpecialityList specialities={this.state.artist?.specialityList} selectSpeciality={this.handleStartBookingProcess}/>
-                    </div>
-                    <Dialog open={this.state.showBookingDialog} onClose={this.hideBookingDialog}>
-                        <CreateBooking specialities={this.state.artist?.specialityList} submit={this.submitCreateBooking} dismiss={this.hideBookingDialog} selectedSpeciality={this.state.selectedSpeciality}/>
-                    </Dialog>
+    const pageContent = (
+        <>
+            <div className={classes.Header} style={{backgroundImage: `url(${artist?.profilePictureUrl})`}}/>
+            <div className={classes.Body}>
+                <div className={classes.NameContainer}>
+                    <h1>{artist?.firstName} {artist?.lastName}</h1>
                 </div>
-                <FloatingButton onClick={this.handleStartBookingProcess}><AddIcon/></FloatingButton>
-                <Dialog open={this.state.showLoginDialog} onClose={this.hideLoginDialog}>
-                    <Login cancel={this.hideLoginDialog}/>
-                </Dialog>
-                <Snackbar observable={this.bookingCreatedNotificationSubject} severity="success"/>
-            </>
-        );
-        return (
-            <Layout>
-                {this.state.loading ? <ArtistPageSkeleton/> : pageContent}
-            </Layout>
-        );
-    }
-}
+                {galleryTemp()}
+                <div className={classes.SpecialityListContainer}>
+                    <ArtistSpecialityList specialities={artist?.specialityList} selectSpeciality={startBookingProcess}/>
+                </div>
+            </div>
+            <FloatingButton onClick={() => startBookingProcess()}><AddIcon/></FloatingButton>
+        </>
+    );
+    return (
+        <Layout>
+            {loading ? <ArtistPageSkeleton/> : pageContent}
+        </Layout>
+    );
+};
 
-const mapStateToProps = state => ({
-    authorizedUser: state.auth.user
-});
-
-export default connect(mapStateToProps)(ArtistPage);
+export default ArtistPage;

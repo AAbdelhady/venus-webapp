@@ -6,13 +6,11 @@ interface Props {
     notification: Notification;
 }
 
-const NotificationRow = (props: Props) => {
-    return (
-        <div className={classes.NotificationRow}>
-            <p>{props.notification.title}</p>
-            <small>{props.notification.body}</small>
-        </div>
-    )
-};
+const NotificationRow = (props: Props) => (
+    <div className={classes.NotificationRow}>
+        <p>{props.notification.title}</p>
+        <small>{props.notification.body}</small>
+    </div>
+);
 
 export default NotificationRow;

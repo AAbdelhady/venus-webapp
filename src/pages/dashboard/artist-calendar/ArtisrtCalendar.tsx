@@ -4,7 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import classes from './ArtistCalendar.module.scss';
 import {CalendarEvent, UserCalendar} from '../../../models/calendar.model';
 import {Booking, bookingToEvent} from '../../../models/booking.model';
-import {Appointment} from '../../../models/appointment.model';
+import {Appointment, appointmentToEvent} from '../../../models/appointment.model';
 
 interface Props {
     calendar: UserCalendar | null;
@@ -17,18 +17,15 @@ const groupId = {
     booking: 'booking'
 };
 
+const appointmentEvents = (calendar: UserCalendar) => calendar.appointments.map(a => appointmentToEvent(a, groupId.appointment));
 const bookingEvents = (calendar: UserCalendar) => calendar.bookings.map(b => bookingToEvent(b, groupId.booking));
 
 const calendarToEvents = (calendar: UserCalendar | null) => {
     if (!calendar) {
         return [];
     }
-    const events: CalendarEvent[] = [];
-    // events.push(...calendar.appointments.map(a => {})); // TODO TBD
-    events.push(...bookingEvents(calendar));
-    events.forEach(b => {
-        b.className = classes.EventTile
-    });
+    const events: CalendarEvent[] = [...appointmentEvents(calendar), ...bookingEvents(calendar)];
+    events.forEach(b => b.className = classes.EventTile);
     return events;
 };
 

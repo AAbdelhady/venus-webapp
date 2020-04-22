@@ -1,0 +1,9 @@
+.NewBookingActionContainer {
+  padding: 1rem;
+  width: 100%;
+
+  & .AddRemoveBtn {
+    height: 100%;
+    width: 100%;
+  }
+}

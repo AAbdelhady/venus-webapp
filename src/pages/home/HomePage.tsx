@@ -26,14 +26,14 @@ class HomePage extends Component<Props> {
                 <h3><a href="/" onClick={googleLogin}>Google</a> <a href="/" onClick={facebookLogin}>Facebook</a></h3>
             </div>
         );
-        const authenticatedPersonSection = this.props.authorizedUser
-            ? <h3>Authenticated user is {this.props.authorizedUser.firstName} {this.props.authorizedUser.lastName} <a href={logoutLink}>Logout</a></h3>
+        const authorizedPersonSection = this.props.authorizedUser
+            ? <h3>Authorized user is {this.props.authorizedUser.firstName} {this.props.authorizedUser.lastName} <a href={logoutLink}>Logout</a></h3>
             : loginLinks;
         return (
             <Layout>
                 <div className={classes.App}>
                     <header className={classes.AppHeader}>
-                        {authenticatedPersonSection}
+                        {authorizedPersonSection}
                         <img src={logo} className={classes.AppLogo} alt="logo"/>
                         <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
                         <small>API base url environment variable value <b>{process.env.REACT_APP_API_BASE_URL}</b></small>
@@ -51,7 +51,7 @@ class HomePage extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
-    authenticatedUser: state.auth.user
+    authorizedUser: state.auth.user
 });
 
 export default connect(mapStateToProps)(HomePage);
