@@ -15,6 +15,7 @@ import i18nReducer from './store/reducers/i18n';
 import notificationReducer from './store/reducers/notification';
 import userActionDialog from './store/reducers/userActionDialog';
 import snackbar from './store/reducers/snackbar';
+import browserNotification from './store/reducers/browserNotification';
 import {popStateFromLocalStorage, pushStateToLocalStorage} from './utils/localStorage';
 
 // @ts-ignore
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
     i18n: i18nReducer,
     notification: notificationReducer,
     userActionDialog: userActionDialog,
+    browserNotification: browserNotification,
     snackbar: snackbar
 });
 

@@ -2,7 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../../../store/actions';
 import {Pageable} from '../../../../models/pageable.model';
-import {Notification, NotificationType} from '../../../../models/notification.model';
+import {Notification} from '../../../../models/notification.model';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import NotificationRow from './NotificationRow';
@@ -13,22 +13,6 @@ const initPageable: Pageable = {
     pageNumber: 0,
     pageSize: 20
 };
-
-const handleNotificationClick = (notification: Notification, dispatch) => {
-    switch (notification.type) {
-        case NotificationType.BOOKING_OFFERING:
-        case NotificationType.BOOKING_REQUEST:
-            if (notification.booking) {
-                dispatch(actions.openBookingDialog(notification.booking))
-            }
-            break;
-        case NotificationType.APPOINTMENT_CONFIRMED:
-            if (notification.appointment) {
-                dispatch(actions.openAppointmentDialog(notification.appointment))
-            }
-            break;
-    }
-}
 
 const notificationMenuItems = (notificationList: Notification[], onNotificationClick) => {
     return notificationList.length > 0
@@ -49,7 +33,7 @@ const NotificationsNavItem = () => {
     const closeNotificationsDropdown = useCallback(() => setAnchorEl(null), [setAnchorEl]);
 
     const onNotificationClick = useCallback((notification) => {
-        handleNotificationClick(notification, dispatch);
+        dispatch(actions.handleNotificationClick(notification));
         closeNotificationsDropdown();
     }, [dispatch, closeNotificationsDropdown]);
 

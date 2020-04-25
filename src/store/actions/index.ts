@@ -22,7 +22,8 @@ export {
 } from './i18n';
 
 export {
-    fetchMyNotifications
+    fetchMyNotifications,
+    handleNotificationClick
 } from './notification';
 
 export {
@@ -37,3 +38,8 @@ export {
     showSnackbar,
     hideSnackbar
 } from './snackbar';
+
+export {
+    showBrowserNotification,
+    resetBrowserNotification
+} from './browserNotification';

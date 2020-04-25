@@ -8,7 +8,7 @@ interface Props {
 
 const ArtistOfferedBookingAction = (props: Props) => (
     <div className={classes.OfferedBookingActionContainer}>
-        {props.booking?.offerings.map(o => <h3>{o.time}</h3>)}
+        {props.booking?.offerings.map(o => <h3 key={o.id}>{o.time}</h3>)}
     </div>
 );
 

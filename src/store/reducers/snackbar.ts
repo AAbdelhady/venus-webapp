@@ -5,30 +5,34 @@ interface State {
     show: boolean;
     text: string;
     severity: Color;
+    onClick: () => void;
 }
 
-interface SnackbarAction {
+interface Action {
     type: string;
     text: string;
     severity: Color;
+    onClick: () => void;
 }
 
 const initialState: State = {
     show: false,
     text: '',
-    severity: 'info'
+    severity: 'info',
+    onClick: () => {}
 };
 
-const showSnackbar = (text: string, severity: Color) => ({
+const showSnackbar = (text: string, severity: Color, onClick: () => void) => ({
     show: true,
     text: text,
-    severity: severity
+    severity: severity,
+    onClick: onClick
 });
 
-const reducer = (state: State = initialState, action: SnackbarAction) => {
+const reducer = (state: State = initialState, action: Action) => {
     switch (action.type) {
         case snackbarActionTypes.SHOW_SNACKBAR:
-            return showSnackbar(action.text, action.severity);
+            return showSnackbar(action.text, action.severity, action.onClick);
         case snackbarActionTypes.HIDE_SNACKBAR:
             return initialState;
         default:
