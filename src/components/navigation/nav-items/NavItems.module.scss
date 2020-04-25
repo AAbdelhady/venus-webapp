@@ -12,7 +12,7 @@
   & .NavigationItem {
     align-items: center;
     border-bottom: 4px solid transparent;
-    color: white;
+    color: $primary-dark;
     cursor: pointer;
     display: flex;
     height: 100%;
@@ -27,5 +27,9 @@
 @media (min-width: $sm-breakpoint) {
   .NavigationItems {
     flex-flow: row;
+
+    & .NavigationItem {
+      color: white;
+    }
   }
 }

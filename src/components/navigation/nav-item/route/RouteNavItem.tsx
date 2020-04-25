@@ -16,7 +16,6 @@ const RouteNavItem = (props: Props) => {
         return null;
     }
     return <NavLink to={localizedLink} exact activeClassName={classes.active} className={classes.RouteNavItemLink}>{props.children}</NavLink>;
-
 };
 
 export default RouteNavItem;

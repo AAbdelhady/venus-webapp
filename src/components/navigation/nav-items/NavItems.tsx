@@ -1,5 +1,4 @@
 import React, {ReactNode} from 'react';
-import {withRouter} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import classes from './NavItems.module.scss';
 import {Role, User} from "../../../models/user.model";
@@ -30,4 +29,4 @@ const NavItems = () => {
     );
 };
 
-export default withRouter(NavItems);
+export default NavItems;
