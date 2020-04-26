@@ -1,4 +1,8 @@
-.Title {
-  text-align: center;
-  margin-top: 25px;
+@import '../../assets/css/variables';
+
+@media (min-width: $sm-breakpoint) {
+  .Title {
+    text-align: right;
+    margin-top: 25px;
+  }
 }

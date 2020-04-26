@@ -1,20 +1,13 @@
 import React from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import SockJsClient from 'react-stomp';
 import logo from "../../assets/logo.svg";
 import classes from './Home.module.scss';
 import {facebookLogin, googleLogin} from '../../utils/common';
 import Layout from "../../hoc/layout/Layout";
 import {logoutLink} from '../../utils/constants';
-import {User} from '../../models/user.model';
 import * as actions from '../../store/actions';
-
-interface Props {
-    authorizedUser: User;
-    history: RouteComponentProps;
-    notify();
-}
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -47,7 +40,7 @@ const HomePage = () => {
                     Notify Me!
                 </button>
             </div>
-            <SockJsClient url={`${process.env.REACT_APP_API_BASE_URL}/ws`} topics={['/user/queue/tst']} onMessage={dummyNotification}/>
+            {authorizedUser && <SockJsClient url={`${process.env.REACT_APP_API_BASE_URL}/ws`} topics={['/user/queue/tst']} onMessage={dummyNotification}/>}
         </Layout>
     );
 }

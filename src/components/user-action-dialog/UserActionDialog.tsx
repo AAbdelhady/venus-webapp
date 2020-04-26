@@ -17,21 +17,21 @@ export enum DialogType {
     APPOINTMENT = 'APPOINTMENT'
 }
 
-const dialogContent = (type: DialogType, props: any, authorizedUser: User) => {
+const dialogContent = (type: DialogType, props: any, authorizedUser: User): any[] => {
     if (!authorizedUser || type === DialogType.LOGIN) {
-        return <Login/>;
+        return [<Login/>, false];
     }
     switch (type) {
         case DialogType.REGISTER:
-            return <Register/>;
+            return [<Register/>, true];
         case DialogType.CREATE_BOOKING:
-            return <CreateBooking authorizedUser={authorizedUser} artist={props.artist} selectedSpeciality={props.selectedSpeciality}/>;
+            return [<CreateBooking authorizedUser={authorizedUser} artist={props.artist} selectedSpeciality={props.selectedSpeciality}/>, false];
         case DialogType.BOOKING:
-            return <BookingDetails authorizedUser={authorizedUser} booking={props.booking}/>;
+            return [<BookingDetails authorizedUser={authorizedUser} booking={props.booking}/>, false];
         case DialogType.APPOINTMENT:
-            return <AppointmentDetails authorizedUser={authorizedUser} appointment={props.appointment}/>;
+            return [<AppointmentDetails authorizedUser={authorizedUser} appointment={props.appointment}/>, false];
         default:
-            return null;
+            return [null, false];
     }
 };
 
@@ -39,9 +39,10 @@ const UserActionDialog = () => {
     const dispatch = useDispatch();
     const {show, dialogType, dialogProps} = useSelector(state => state.userActionDialog);
     const authorizedUser = useSelector(state => state.auth.user);
+    const [content, blockClose] = dialogContent(dialogType, dialogProps, authorizedUser);
     return (
-        <Dialog open={show} onClose={() => dispatch(actions.closeUserActionDialog())}>
-            {dialogContent(dialogType, dialogProps, authorizedUser)}
+        <Dialog open={show} onClose={() => dispatch(actions.closeUserActionDialog())} blockClose={blockClose}>
+            {content}
         </Dialog>
     );
 };
