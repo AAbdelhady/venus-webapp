@@ -10,7 +10,7 @@ import classes from './SearchPage.module.scss';
 import JumpToTop from '../../components/jump-to-top/JumpToTop';
 import {fetchArtistCategories} from '../../api/artist.api';
 import {Category} from '../../models/category.model';
-import CategorySelect from './category-select/CategorySelect';
+import Select from '../../components/ui/select/Select';
 
 const PAGE_SIZE = 20;
 
@@ -86,7 +86,13 @@ class SearchPage extends Component<Props> {
             <Layout>
                 <div className={classes.Container}>
                     <div className={classes.CategorySelectContainer}>
-                        <CategorySelect categories={this.state.categories} selected={this.state.currentCategory} onChange={this.onCategoryChanged}/>
+                        <Select name="specialityId"
+                                options={this.state.categories}
+                                value={this.state.currentCategory}
+                                onChange={this.onCategoryChanged}
+                                textProperty="text"
+                                valueProperty="value"
+                        />
                     </div>
                     <ArtistCardList artistList={artists} hasMore={this.hasMoreResults} nextPage={this.nextPage} refresh={this.refresh} loading={this.props.isFetchingPage} pageSize={PAGE_SIZE}/>
                 </div>

@@ -9,7 +9,7 @@ interface Props {
     options?: any[];
     textProperty: string;
     valueProperty: string;
-    label: string;
+    label?: string;
     name: string;
     value: any;
     style?: any;
