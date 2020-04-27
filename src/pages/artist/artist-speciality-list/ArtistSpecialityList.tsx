@@ -14,12 +14,10 @@ interface Props {
 
 const ArtistSpecialityList = (props: Props) => {
     const specialityList = () => props.specialities && props.specialities.map(s =>
-        <ListItem button key={s.id} onClick={() => props.selectSpeciality(s)}>
-            <ListItemIcon>
-                <InboxIcon/>
-            </ListItemIcon>
-            <ListItemText primary={s.name}/>
-            <ListItemText primary={s.price}/>
+        <ListItem button key={s.id} onClick={() => props.selectSpeciality(s)} className="row">
+            <ListItemIcon className="col-2"><InboxIcon/></ListItemIcon>
+            <ListItemText primary={s.name} className="col-5"/>
+            <ListItemText primary={s.price} className="col-5"/>
         </ListItem>
     );
     return (
