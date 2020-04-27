@@ -20,7 +20,7 @@ const Register = () => {
 
     let content = <RolePicker pickRole={pickRole}/>;
     if (selectedRole === Role.ARTIST) {
-        content = <RegisterArtist register={() => dispatch(actions.registerArtist)} back={() => setSelectedRole(Role.UNSPECIFIED)}/>;
+        content = <RegisterArtist back={() => setSelectedRole(Role.UNSPECIFIED)}/>;
     }
     if (selectedRole === Role.CUSTOMER) {
         // content = <h1 onClick={this.backToPickRole}>CUSTOMER</h1>

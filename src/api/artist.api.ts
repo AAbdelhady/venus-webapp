@@ -4,7 +4,13 @@ import {pageableQueryParams} from './api.util';
 
 const root = 'artist';
 
-export const registerAsArtist = (artistRequest: ArtistRequest) => axios.post(root, artistRequest);
+export const registerAsArtist = (category: string, specialities: SpecialityRequest[]) => {
+    const artistRequest: ArtistRequest = {
+        category: category,
+        specialities: specialities
+    }
+    return axios.post(root, artistRequest);
+};
 
 export const fetchArtists = (pageable: Pageable, category?: string) => {
     let queryParams: any = pageableQueryParams(pageable);
@@ -25,6 +31,11 @@ export const fetchArtistCategories = () => {
 };
 
 export interface ArtistRequest {
-    category: string | null,
-    specialities: []
+    category: string | null;
+    specialities: SpecialityRequest[];
+}
+
+export interface SpecialityRequest {
+    name: string;
+    price: number;
 }
