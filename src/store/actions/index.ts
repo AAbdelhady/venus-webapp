@@ -17,7 +17,6 @@ export {
 } from './artist';
 
 export {
-    changeLanguage,
     setLanguageFromRoute
 } from './i18n';
 

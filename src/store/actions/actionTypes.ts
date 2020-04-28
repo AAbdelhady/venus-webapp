@@ -16,7 +16,7 @@ export const ARTIST = {
 };
 
 export const I18N = {
-    CHANGE_LANG: 'CHANGE_LANG'
+    SET_LANG: 'SET_LANG'
 };
 
 export const NOTIFICATION = {

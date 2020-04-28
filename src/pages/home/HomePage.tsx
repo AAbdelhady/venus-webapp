@@ -1,19 +1,13 @@
 import React from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import SockJsClient from 'react-stomp';
 import logo from "../../assets/logo.svg";
 import classes from './Home.module.scss';
-import {facebookLogin, googleLogin} from '../../utils/common';
 import Layout from "../../hoc/layout/Layout";
 import {logoutLink} from '../../utils/constants';
-import {User} from '../../models/user.model';
 import * as actions from '../../store/actions';
-
-interface Props {
-    authorizedUser: User;
-    history: RouteComponentProps;
-    notify();
-}
+import Login from '../../components/user-action-dialog/dialog-content/login/Login';
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -25,7 +19,7 @@ const HomePage = () => {
     const loginLinks = (
         <div>
             <h3>Please login </h3>
-            <h3><a href="/" onClick={googleLogin}>Google</a> <a href="/" onClick={facebookLogin}>Facebook</a></h3>
+            <Login/>
         </div>
     );
     const authorizedPersonSection = authorizedUser
@@ -40,14 +34,15 @@ const HomePage = () => {
                     <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
                     <small>API base url environment variable value <b>{process.env.REACT_APP_API_BASE_URL}</b></small>
                     <Link to="/test">Test Page ></Link>
-                    </header>
+                </header>
 
                 <button onClick={dummyNotification}>
                     Notify Me!
                 </button>
-                </div>
-            </Layout>
-        );
+            </div>
+            {authorizedUser && <SockJsClient url={`${process.env.REACT_APP_API_BASE_URL}/ws`} topics={['/user/queue/tst']} onMessage={dummyNotification}/>}
+        </Layout>
+    );
 }
 
 export default HomePage;

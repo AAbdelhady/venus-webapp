@@ -1,72 +1,51 @@
-import React, {Component} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Dialog from '../dialog/Dialog';
 import {ZIndex} from '../../utils/enums';
 import classes from './withErrorHandler.module.scss';
 
-const withErrorHandler: any = (WrappedComponent, axios) => class extends Component {
+const shouldShowError = (error) => !!(error && (error?.response?.status !== 401));
 
-    reqInterceptor;
-    resInterceptor;
-    state: any = {
-        error: null
-    };
-
-    constructor(props) {
-        super(props);
-        this.initInterceptors();
+const errorMessage = (error) => {
+    if (error?.response) {
+        const errorResponse = error.response;
+        const meta = `[status: ${errorResponse.status} - code: ${errorResponse.data.code?.value}]`;
+        const message = errorResponse.data.message || errorResponse.message;
+        return <span><strong>{meta}</strong>&nbsp;{message}</span>
     }
-
-    componentWillUnmount() {
-        this.ejectInterceptors();
+    if (error?.message) {
+        return <strong>{error?.message}</strong>;
     }
+    return <strong>Something went wrong :(</strong>
+}
 
-    errorConfirmedHandler = () => {
-        this.setState({error: null});
-    };
+const withErrorHandler: any = (WrappedComponent, axios) => (props) => {
+    const [error, setError] = useState<any>(null);
 
-    get showError(): boolean {
-        return !!(this.state.error && (this.state.error?.response?.status !== 401));
-    }
+    const reqInterceptor = useCallback(axios.interceptors.request.use(req => {
+        setError(null);
+        return req;
+    }), [axios]);
 
-    get errorMessage() {
-        if (this.state.error?.response) {
-            const errorResponse = this.state.error.response;
-            const meta = `[status: ${errorResponse.status} - code: ${errorResponse.data.code?.value}]`;
-            const message = errorResponse.data.message || errorResponse.message;
-            return <span><strong>{meta}</strong>&nbsp;{message}</span>
+    const resInterceptor = useCallback(axios.interceptors.response.use(res => res, error => {
+        setError(null);
+        throw error;
+    }), [axios]);
+
+    useEffect(() => {
+        return () => {
+            axios.interceptors.request.eject(reqInterceptor);
+            axios.interceptors.response.eject(resInterceptor);
         }
-        if (this.state.error?.message) {
-            return <strong>{this.state.error?.message}</strong>;
-        }
-        return <strong>Something went wrong :(</strong>
-    }
+    }, [reqInterceptor, resInterceptor]);
 
-    private initInterceptors() {
-        this.reqInterceptor = axios.interceptors.request.use(req => {
-            this.setState({error: null});
-            return req;
-        });
-        this.resInterceptor = axios.interceptors.response.use(res => res, error => {
-            this.setState({error: error});
-            throw error;
-        });
-    }
-
-    private ejectInterceptors() {
-        axios.interceptors.request.eject(this.reqInterceptor);
-        axios.interceptors.response.eject(this.resInterceptor);
-    }
-
-    render() {
-        return (
-            <>
-                <Dialog open={this.showError} onClose={this.errorConfirmedHandler} zIndex={ZIndex.errorHandlerDialog}>
-                    <p className={classes.Message}>{this.errorMessage}</p>
-                </Dialog>
-                <WrappedComponent {...this.props} />
-            </>
-        );
-    }
+    return (
+        <>
+            <Dialog open={shouldShowError(error)} onClose={() => setError(null)} zIndex={ZIndex.errorHandlerDialog}>
+                <p className={classes.Message}>{errorMessage(error)}</p>
+            </Dialog>
+            <WrappedComponent {...props} />
+        </>
+    );
 };
 
 export default withErrorHandler;

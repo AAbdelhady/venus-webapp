@@ -7,7 +7,7 @@ import ns from '../../../../../../../i18n/namespace';
 import Button from '@material-ui/core/Button';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import {formHasErrors} from '../../../../../../../utils/common';
+import {formHasErrors} from '../../../../../../../utils/form.utils';
 
 interface SpecialityForm {
     name: string;

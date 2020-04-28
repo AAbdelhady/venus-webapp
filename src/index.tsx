@@ -16,7 +16,6 @@ import notificationReducer from './store/reducers/notification';
 import userActionDialog from './store/reducers/userActionDialog';
 import snackbar from './store/reducers/snackbar';
 import browserNotification from './store/reducers/browserNotification';
-import {popStateFromLocalStorage, pushStateToLocalStorage} from './utils/localStorage';
 
 // @ts-ignore
 const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
@@ -32,15 +31,9 @@ const rootReducer = combineReducers({
     snackbar: snackbar
 });
 
-const persistedState = popStateFromLocalStorage();
-
-const store = createStore(rootReducer, persistedState, composeEnhancers(
+const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
-
-export const persistState = () => {
-    pushStateToLocalStorage(store.getState());
-};
 
 const app = (
     <Provider store={store}>

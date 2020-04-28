@@ -1,4 +1,4 @@
-import {ArtistRequest, registerAsArtist} from '../../api/artist.api';
+import {registerAsArtist, SpecialityRequest} from '../../api/artist.api';
 import {registerAsCustomer} from '../../api/customer.api';
 import {hideLoadingOverlay, showLoadingOverlay} from "./ui";
 
@@ -10,10 +10,10 @@ export const registerCustomer = () => {
     };
 };
 
-export const registerArtist = (artistRequest: ArtistRequest) => {
+export const registerArtist = (category: string, specialities: SpecialityRequest[]) => {
     return dispatch => {
         dispatch(showLoadingOverlay());
-        const promise = registerAsArtist(artistRequest);
+        const promise = registerAsArtist(category, specialities);
         handleRegisterResult(promise, dispatch);
     };
 };

@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import {Artist} from '../../../models/artist.model';
 import ArtistCardSkeleton from './artist-card/ArtistCardSkeleton';
+import DragHandleIcon from '@material-ui/icons/DragHandle';
 
 interface Props {
     artistList: Artist[];
@@ -13,12 +14,9 @@ interface Props {
     loading: boolean;
     pageSize: number;
     nextPage();
-    refresh();
 }
 
-const endMessage = <h3 style={{textAlign: 'center'}}>Yay! You have seen it all</h3>;
-const pullDownToRefreshContent = <h3 style={{textAlign: 'center'}}>&#8595; Pull down to refresh</h3>;
-const releaseToRefreshContent = <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>;
+const endMessage = <h3 style={{textAlign: 'center'}}><DragHandleIcon/></h3>;
 
 const artistCardList = (artistList) => artistList.map(artist => (
     <Col key={artist.id} sm={4}>
@@ -59,12 +57,7 @@ const ArtistCardList = (props: Props) => {
             next={nextPage}
             hasMore={props.hasMore}
             loader={null}
-            endMessage={endMessage}
-            refreshFunction={props.refresh}
-            pullDownToRefresh
-            pullDownToRefreshThreshold={50}
-            pullDownToRefreshContent={pullDownToRefreshContent}
-            releaseToRefreshContent={releaseToRefreshContent}>
+            endMessage={endMessage}>
             <Row>
                 {cardList}
             </Row>

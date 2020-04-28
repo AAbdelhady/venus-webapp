@@ -1,0 +1,1 @@
+export const formHasErrors = (formik: any) => !!Object.keys(formik.errors).length || !formik.dirty;

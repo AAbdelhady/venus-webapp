@@ -1,5 +1,5 @@
 import {AUTH as authActionTypes} from '../actions/actionTypes';
-import {updateObject} from '../../utils/common';
+import {updateObject} from '../../utils/object.utils';
 import {User} from "../../models/user.model";
 
 interface State {

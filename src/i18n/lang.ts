@@ -15,8 +15,6 @@ export type Lang = (typeof supportedLangs)[number];
 
 export const DEFAULT_LANG: Lang = 'et';
 
-export const langPrefix = (lang: Lang) => lang === DEFAULT_LANG ? '' : `/${lang}`;
-
 export const en = {
     common: common_en,
     register: register_en,
@@ -36,6 +34,6 @@ export const ru = {
 };
 
 
-export const isSupportedLang = (lang) => supportedLangs.includes(lang);
-
 export const langParam = (lang: Lang) => lang === DEFAULT_LANG ? '' : `/${lang}`;
+
+export const isSupportedLang = (lang) => supportedLangs.includes(lang);

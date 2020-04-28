@@ -1,5 +1,5 @@
 import {UI as uiActionTypes} from '../actions/actionTypes';
-import {updateObject} from '../../utils/common';
+import {updateObject} from '../../utils/object.utils';
 
 interface State {
     showLoading: boolean;

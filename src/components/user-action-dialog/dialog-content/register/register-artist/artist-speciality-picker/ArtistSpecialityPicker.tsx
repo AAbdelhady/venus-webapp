@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import SpecialityEntry from './speciality-entry/SpecialityEntry';
-import {Speciality} from '../../../../../../models/speciality.model';
 import Button from '@material-ui/core/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import {SpecialityRequest} from '../../../../../../api/artist.api';
 
 const ArtistSpecialityPicker = (props) => {
-    const [specialityList, setSpecialityList] = useState<Speciality[]>([]);
-    const addSpeciality = (speciality: Speciality) => setSpecialityList([...specialityList, speciality]);
-    const removeSpeciality = (speciality: Speciality) => {
+    const [specialityList, setSpecialityList] = useState<SpecialityRequest[]>([]);
+    const addSpeciality = (speciality: SpecialityRequest) => setSpecialityList([...specialityList, speciality]);
+    const removeSpeciality = (speciality: SpecialityRequest) => {
         const updatedSpecialityList = specialityList.filter(s => s.name !== speciality.name);
         setSpecialityList(updatedSpecialityList);
     };
