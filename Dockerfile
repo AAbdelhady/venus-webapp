@@ -1,8 +1,7 @@
 FROM node:carbon
 WORKDIR /usr/src/app
-COPY server.js ./
-COPY server .
-COPY build ./build
+COPY build .
+COPY server/package.json .
 RUN npm install
 EXPOSE 3000
-CMD [ "node", "server.js" ]
+CMD [ "node", "server.tsx" ]
