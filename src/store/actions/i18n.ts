@@ -1,25 +1,13 @@
-import {History} from 'history';
-import {matchPath} from 'react-router';
 import {I18N as i18nTypes} from './actionTypes';
-import {DEFAULT_LANG, isSupportedLang, Lang, langParam} from '../../i18n/lang';
+import {DEFAULT_LANG, isSupportedLang, Lang} from '../../i18n/lang';
 import i18n from '../../i18n/i18n';
 import axios from '../../axios';
-import {persistState} from '../../index';
+import {matchPath} from 'react-router';
 
-const langChange = (lang: Lang) => ({
-    type: i18nTypes.CHANGE_LANG,
+const langChangeAction = (lang: Lang) => ({
+    type: i18nTypes.SET_LANG,
     lang: lang
 });
-
-const updateLangParamInRoute = (newLang: Lang, history: History) => {
-    const currentPathname = history.location.pathname;
-    const currentLang = extractLangFromPath(currentPathname);
-    if (currentLang === newLang) {
-        return;
-    }
-    const newPathname = currentLang === DEFAULT_LANG ? `${langParam(newLang)}${currentPathname}` : currentPathname.replace(langParam(currentLang), langParam(newLang));
-    history.push(newPathname);
-};
 
 const updateAxiosLangQueryParam = (lang) => {
     axios.interceptors.request.use(req => {
@@ -29,9 +17,7 @@ const updateAxiosLangQueryParam = (lang) => {
 };
 
 const extractLangFromPath = (pathname: string) => {
-    const pathMatch: any = matchPath(pathname, {
-        path: '/:lang'
-    });
+    const pathMatch: any = matchPath(pathname, {path: '/:lang'});
     let lang = pathMatch?.params?.lang;
     if (!lang || !isSupportedLang(lang)) {
         lang = DEFAULT_LANG;
@@ -39,20 +25,11 @@ const extractLangFromPath = (pathname: string) => {
     return lang;
 };
 
-export const changeLanguage = (lang: Lang, history: History) => {
-    return dispatch => {
-        dispatch(langChange(lang));
-        persistState();
-        updateLangParamInRoute(lang, history);
-        window.location.reload();
-    }
-};
-
 export const setLanguageFromRoute = (pathname: string) => {
     return dispatch => {
         let lang = extractLangFromPath(pathname);
-        dispatch(langChange(lang));
         updateAxiosLangQueryParam(lang);
+        dispatch(langChangeAction(lang));
         i18n.changeLanguage(lang).then(() => console.log(`language extracted from url [${lang}]`));
         return new Promise(resolve => resolve());
     }

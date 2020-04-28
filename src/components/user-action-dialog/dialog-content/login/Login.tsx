@@ -3,22 +3,28 @@ import {useDispatch} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import GoogleIcon from '../../../ui/svg-icon/icons/GoogleIcon';
 import FacebookIcon from '../../../ui/svg-icon/icons/FacebookIcon';
-import {facebookLogin, googleLogin} from '../../../../utils/common';
 import classes from './Login.module.scss';
 import * as actions from '../../../../store/actions';
+import {pushToLocalStorage} from '../../../../utils/localStorage.utils';
+import {localStorageKeys, socialLoginLinkPrefix} from '../../../../utils/constants';
 
+const login = (event: any, suffix: string) => {
+    event.preventDefault();
+    pushToLocalStorage(localStorageKeys.redirect, window.location.pathname);
+    window.location.href = socialLoginLinkPrefix + suffix;
+};
 
 const Login = () => {
     const dispatch = useDispatch();
     return (
         <div className={classes.Container}>
             <div className={classes.ButtonContainer}>
-                <Button variant="contained" startIcon={<GoogleIcon/>} onClick={googleLogin}>
+                <Button variant="contained" startIcon={<GoogleIcon/>} onClick={(event) => login(event, 'google')}>
                     Google
                 </Button>
             </div>
             <div className={classes.ButtonContainer}>
-                <Button variant="contained" startIcon={<FacebookIcon/>} onClick={facebookLogin}>
+                <Button variant="contained" startIcon={<FacebookIcon/>} onClick={(event) => login(event, 'facebook')}>
                     Facebook
                 </Button>
             </div>

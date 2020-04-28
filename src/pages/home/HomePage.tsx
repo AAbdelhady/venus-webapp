@@ -4,10 +4,10 @@ import {Link} from 'react-router-dom';
 import SockJsClient from 'react-stomp';
 import logo from "../../assets/logo.svg";
 import classes from './Home.module.scss';
-import {facebookLogin, googleLogin} from '../../utils/common';
 import Layout from "../../hoc/layout/Layout";
 import {logoutLink} from '../../utils/constants';
 import * as actions from '../../store/actions';
+import Login from '../../components/user-action-dialog/dialog-content/login/Login';
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const HomePage = () => {
     const loginLinks = (
         <div>
             <h3>Please login </h3>
-            <h3><a href="/" onClick={googleLogin}>Google</a> <a href="/" onClick={facebookLogin}>Facebook</a></h3>
+            <Login/>
         </div>
     );
     const authorizedPersonSection = authorizedUser

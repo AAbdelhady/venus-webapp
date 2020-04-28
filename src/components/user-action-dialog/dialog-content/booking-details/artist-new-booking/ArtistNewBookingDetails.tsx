@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import {Booking} from '../../../../../models/booking.model';
 import TimePicker from '../../../../ui/time-picker/TimePicker';
 import Button from '@material-ui/core/Button';
-import {addItemIfNotExist} from '../../../../../utils/array';
+import {addItemIfNotExist} from '../../../../../utils/array.utils';
 import classes from './ArtistNewBookingDetails.module.scss';
 import {offerAppointmentTimes} from '../../../../../api/booking.api';
 import {onUserActionSubmitted} from '../../../../../store/actions/userActionDialog';

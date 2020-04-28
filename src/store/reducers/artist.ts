@@ -1,5 +1,5 @@
 import {ARTIST as artistActionTypes} from '../actions/actionTypes';
-import {updateObject} from '../../utils/common';
+import {updateObject} from '../../utils/object.utils';
 import {Artist} from '../../models/artist.model';
 import {Page} from '../../models/page.model';
 

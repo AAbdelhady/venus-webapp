@@ -1,12 +1,12 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
-import {loadFromLocalStorage} from '../../utils/localStorage';
+import {popFromLocalStorage} from '../../utils/localStorage.utils';
 import {localStorageKeys} from '../../utils/constants';
 
 const DEFAULT_REDIRECT_URL = '/';
 
 const redirectPage = () => {
-    let redirectUrl = loadFromLocalStorage(localStorageKeys.redirect);
+    let redirectUrl = popFromLocalStorage(localStorageKeys.redirect);
     if (!redirectUrl) {
         redirectUrl = DEFAULT_REDIRECT_URL;
     }

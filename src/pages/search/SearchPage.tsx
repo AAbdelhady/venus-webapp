@@ -59,9 +59,9 @@ const SearchPage = () => {
                 <ArtistCardList artistList={artistList || []}
                                 hasMore={artistList.length !== totalElements}
                                 nextPage={nextPage}
-                                refresh={() => startOver(currentCategory)}
                                 loading={loading}
-                                pageSize={PAGE_SIZE}/>
+                                pageSize={PAGE_SIZE}
+                />
             </div>
             <JumpToTop/>
         </Layout>

@@ -1,7 +1,6 @@
 import React, {Suspense} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import TestPage from "./pages/test/TestPage";
 import RedirectPage from "./pages/redirect/RedirectPage";
 import HomePage from "./pages/home/HomePage";
 import NotFoundPage from "./pages/not-found/NotFoundPage";
@@ -32,7 +31,6 @@ const Routes = () => {
                 {customerOnlyRoutes(authorizedUser)}
                 <Route key="search" path="/:lang?/search" component={SearchPage}/>
                 <Route key="artist" path="/:lang?/artist/:id" component={ArtistPage}/>
-                <Route path="/:lang?/test" component={TestPage}/>
                 <Route path="/redirect" exact component={RedirectPage}/>
                 <Route path="/:lang" component={HomePage}/>
                 <Route path="/" exact component={HomePage}/>

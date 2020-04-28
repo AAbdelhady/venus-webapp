@@ -1,5 +1,5 @@
 import {NOTIFICATION as notificationActionTypes} from '../actions/actionTypes';
-import {updateObject} from '../../utils/common';
+import {updateObject} from '../../utils/object.utils';
 import {Page} from '../../models/page.model';
 
 interface State {

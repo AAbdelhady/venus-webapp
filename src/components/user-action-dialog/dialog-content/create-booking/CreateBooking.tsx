@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import {formHasErrors} from '../../../../utils/common';
+import {formHasErrors} from '../../../../utils/form.utils';
 import Select from '../../../ui/select/Select';
 import classes from './CreateBooking.module.scss';
 import * as actions from '../../../../store/actions';
