@@ -33,7 +33,7 @@ const HomePage = () => {
                     <img src={logo} className={classes.AppLogo} alt="logo"/>
                     <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
                     <small>API base url environment variable value <b>{process.env.REACT_APP_API_BASE_URL}</b></small>
-                    <Link to="/test">Test Page ></Link>
+                    <Link to="/search">Search Page ></Link>
                 </header>
 
                 <button onClick={dummyNotification}>
