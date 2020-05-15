@@ -16,7 +16,7 @@ interface Props {
     onClose?;
     zIndex?;
     containerClassName?;
-    blockClose?: boolean;
+    disableAutoClose?: boolean;
 }
 
 const Transition: React.ComponentType<TransitionProps> = React.forwardRef((props, ref) => (
@@ -30,8 +30,8 @@ const Dialog = (props: Props) => {
     };
     return (
         <MuiDialog open={props.open} onClose={props.onClose} keepMounted TransitionComponent={Transition} fullScreen={fullScreen} maxWidth={false} style={style}
-                   disableBackdropClick={props.blockClose} disableEscapeKeyDown={props.blockClose}>
-            {!props.blockClose && <DialogTitle className={classes.Title}><CloseIcon onClick={props.onClose} className="float-right"/></DialogTitle>}
+                   disableBackdropClick={props.disableAutoClose} disableEscapeKeyDown={props.disableAutoClose}>
+            {fullScreen && !props.disableAutoClose && <DialogTitle className={classes.Title}><CloseIcon onClick={props.onClose} className="float-right"/></DialogTitle>}
             <DialogContent className={props.containerClassName}>
                 {props.open && props.children}
             </DialogContent>

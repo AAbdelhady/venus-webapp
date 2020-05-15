@@ -1,4 +1,5 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React from 'react';
+import useHttpErrorHandler from '../../hooks/http-error-handler';
 import Dialog from '../dialog/Dialog';
 import {ZIndex} from '../../utils/enums';
 import classes from './withErrorHandler.module.scss';
@@ -19,28 +20,10 @@ const errorMessage = (error) => {
 }
 
 const withErrorHandler: any = (WrappedComponent, axios) => (props) => {
-    const [error, setError] = useState<any>(null);
-
-    const reqInterceptor = useCallback(axios.interceptors.request.use(req => {
-        setError(null);
-        return req;
-    }), [axios]);
-
-    const resInterceptor = useCallback(axios.interceptors.response.use(res => res, error => {
-        setError(null);
-        throw error;
-    }), [axios]);
-
-    useEffect(() => {
-        return () => {
-            axios.interceptors.request.eject(reqInterceptor);
-            axios.interceptors.response.eject(resInterceptor);
-        }
-    }, [reqInterceptor, resInterceptor]);
-
+    const [error, clearError] = useHttpErrorHandler(axios);
     return (
         <>
-            <Dialog open={shouldShowError(error)} onClose={() => setError(null)} zIndex={ZIndex.errorHandlerDialog}>
+            <Dialog open={shouldShowError(error)} onClose={clearError} zIndex={ZIndex.errorHandlerDialog}>
                 <p className={classes.Message}>{errorMessage(error)}</p>
             </Dialog>
             <WrappedComponent {...props} />

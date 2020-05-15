@@ -41,7 +41,7 @@ const UserActionDialog = () => {
     const authorizedUser = useSelector(state => state.auth.user);
     const [content, blockClose] = dialogContent(dialogType, dialogProps, authorizedUser);
     return (
-        <Dialog open={show} onClose={() => dispatch(actions.closeUserActionDialog())} blockClose={blockClose}>
+        <Dialog open={show} onClose={() => dispatch(actions.closeUserActionDialog())} disableAutoClose={blockClose}>
             {content}
         </Dialog>
     );
